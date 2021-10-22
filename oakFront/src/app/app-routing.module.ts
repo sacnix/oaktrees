@@ -7,6 +7,7 @@ import { NuevoRolComponent } from './rol/nuevo-rol.component';
 
 const routes: Routes = [
   { path: '', component: ListaRolComponent },
+  { path: 'lista', component: ListaRolComponent },
   { path: 'detalle/:id', component: DetalleRolComponent },
   { path: 'nuevo', component: NuevoRolComponent },
   { path: 'editar/:id', component: EditarRolComponent },

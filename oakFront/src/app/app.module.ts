@@ -15,6 +15,27 @@ import { FormsModule } from '@angular/forms';
 //externos
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ListaPrincipalComponent } from './principal/lista-principal/lista-principal.component';
+import { ListarComponent } from './catalogo/listar/listar.component';
+import { CambiarClaveComponent } from './persona/cambiar-clave/cambiar-clave.component';
+import { CrearCuentaComponent } from './persona/crear-cuenta/crear-cuenta.component';
+import { EditarUsuarioAdminComponent } from './persona/editar-usuario-admin/editar-usuario-admin.component';
+import { EliminarCuentaComponent } from './persona/eliminar-cuenta/eliminar-cuenta.component';
+import { IniciarSesionComponent } from './persona/iniciar-sesion/iniciar-sesion.component';
+import { MiCuentaComponent } from './persona/mi-cuenta/mi-cuenta.component';
+import { NuevoUsuarioAdminComponent } from './persona/nuevo-usuario-admin/nuevo-usuario-admin.component';
+import { RecordarClaveComponent } from './persona/recordar-clave/recordar-clave.component';
+import { UsuariosComponent } from './persona/listar-usuarios/usuarios.component';
+import { CategoriasAdminComponent } from './categoria/categorias-admin/categorias-admin.component';
+import { EditarCategoriaAdminComponent } from './categoria/editar-categoria-admin/editar-categoria-admin.component';
+import { NuevaCategoriaComponent } from './categoria/nueva-categoria/nueva-categoria.component';
+import { DetalleProductoComponent } from './producto/detalle-producto/detalle-producto.component';
+import { EditarProductoComponent } from './producto/editar-producto/editar-producto.component';
+import { DetallePedidoComponent } from './pedido/detalle-pedido/detalle-pedido.component';
+import { HistoricoPedidoComponent } from './pedido/historico-pedidos/historico-pedido.component';
+import { EditarPedidoAdminComponent } from './pedido/editar-pedido-admin/editar-pedido-admin.component';
+import { EditarPedidoComponent } from './pedido/editar-pedido/editar-pedido.component';
+import { ListarPedidosComponent } from './pedido/listar-pedidos/listar-pedidos.component';
 
 
 @NgModule({
@@ -23,7 +44,28 @@ import { ToastrModule } from 'ngx-toastr';
     ListaRolComponent,
     DetalleRolComponent,
     NuevoRolComponent,
-    EditarRolComponent
+    EditarRolComponent,
+    ListaPrincipalComponent,
+    ListarComponent,
+    CambiarClaveComponent,
+    CrearCuentaComponent,
+    EditarUsuarioAdminComponent,
+    EliminarCuentaComponent,
+    IniciarSesionComponent,
+    MiCuentaComponent,
+    NuevoUsuarioAdminComponent,
+    RecordarClaveComponent,
+    UsuariosComponent,
+    CategoriasAdminComponent,
+    EditarCategoriaAdminComponent,
+    NuevaCategoriaComponent,
+    DetalleProductoComponent,
+    EditarProductoComponent,
+    DetallePedidoComponent,
+    HistoricoPedidoComponent,
+    EditarPedidoAdminComponent,
+    EditarPedidoComponent,
+    ListarPedidosComponent
   ],
   imports: [
     BrowserModule,

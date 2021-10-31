@@ -2,7 +2,6 @@ package co.com.oaktrees.dto;
 
 public class ProductoDTO {
 
-    private String idProducto;
     private String nombre;
     private String descripcion;
     private float precio;
@@ -30,14 +29,6 @@ public class ProductoDTO {
 
     public ProductoDTO() {
 
-    }
-
-    public String getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(String idProducto) {
-        this.idProducto = idProducto;
     }
 
     public String getNombre() {

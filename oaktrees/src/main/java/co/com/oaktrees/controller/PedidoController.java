@@ -27,7 +27,7 @@ public class PedidoController {
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<Pedido> getById(@PathVariable("id") String id) {
+    public ResponseEntity<Pedido> getById(@PathVariable("id") int id) {
         if (!pedidoService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         Pedido pedido = pedidoService.getOne(id).get();
@@ -53,10 +53,10 @@ public class PedidoController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") String id, @RequestBody PedidoDTO pedidoDTO) {
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody PedidoDTO pedidoDTO) {
         if (!pedidoService.existsById(id))
             return new ResponseEntity(new Mensaje("El carrito no existe"), HttpStatus.NOT_FOUND);
-        if (pedidoService.existsByIdUsuario(pedidoDTO.getIdUsuario()) && pedidoService.getOne(pedidoDTO.getIdCarrito()).get().getIdCarrito() != id)
+        if (pedidoService.existsByIdUsuario(pedidoDTO.getIdUsuario()) && pedidoService.getByIdUsuario(pedidoDTO.getIdUsuario()).get().getIdPedido() != id)
             return new ResponseEntity<>(new Mensaje("Ese usuario ya posee un carrito"),
                     HttpStatus.BAD_REQUEST);
         if (StringUtils.isBlank(pedidoDTO.getIdUsuario()))
@@ -73,7 +73,7 @@ public class PedidoController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") String id) {
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
         if (!pedidoService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         pedidoService.delete(id);

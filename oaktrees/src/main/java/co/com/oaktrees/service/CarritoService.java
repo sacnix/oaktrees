@@ -20,8 +20,8 @@ public class CarritoService {
         return carritoRepository.findAll();
     }
 
-    public Optional<Carrito> getOne(String id){
-        return carritoRepository.findById(id);
+    public Optional<Carrito> getOne(int id){
+        return carritoRepository.findByIdCarrito(id);
     }
 
     public Optional<Carrito> getByIdUsuario(String idUsuario){
@@ -32,12 +32,12 @@ public class CarritoService {
         carritoRepository.save(persona);
     }
 
-    public void delete(String id){
-        carritoRepository.deleteById(id);
+    public void delete(int id){
+        carritoRepository.deleteByIdCarrito(id);
     }
 
-    public boolean existsById(String id){
-        return carritoRepository.existsById(id);
+    public boolean existsById(int id){
+        return carritoRepository.existsByIdCarrito(id);
     }
 
     public boolean existsByIdUsuario(String idUsuario){

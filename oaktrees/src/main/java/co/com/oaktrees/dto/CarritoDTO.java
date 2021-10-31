@@ -2,7 +2,6 @@ package co.com.oaktrees.dto;
 
 public class CarritoDTO {
 
-    private String idCarrito;
     private float subTotal;
     private float total;
     private String idUsuario;
@@ -14,14 +13,6 @@ public class CarritoDTO {
     }
 
     public CarritoDTO() {
-    }
-
-    public String getIdCarrito() {
-        return idCarrito;
-    }
-
-    public void setIdCarrito(String idCarrito) {
-        this.idCarrito = idCarrito;
     }
 
     public float getSubTotal() {

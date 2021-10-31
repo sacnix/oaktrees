@@ -9,8 +9,8 @@ import javax.persistence.Id;
 public class Carrito {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String idCarrito;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idCarrito;
     private float subTotal;
     private float total;
     private String idUsuario;
@@ -24,11 +24,11 @@ public class Carrito {
     public Carrito() {
     }
 
-    public String getIdCarrito() {
+    public int getIdCarrito() {
         return idCarrito;
     }
 
-    public void setIdCarrito(String idCarrito) {
+    public void setIdCarrito(int idCarrito) {
         this.idCarrito = idCarrito;
     }
 

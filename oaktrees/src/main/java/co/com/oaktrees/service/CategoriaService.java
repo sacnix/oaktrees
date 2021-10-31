@@ -20,7 +20,7 @@ public class CategoriaService {
         return categoriaRepository.findAll();
     }
 
-    public Optional<Categoria> getOne(String id){
+    public Optional<Categoria> getOne(int id){
         return categoriaRepository.findById(id);
     }
 
@@ -32,11 +32,11 @@ public class CategoriaService {
         categoriaRepository.save(persona);
     }
 
-    public void delete(String id){
+    public void delete(int id){
         categoriaRepository.deleteById(id);
     }
 
-    public boolean existsById(String id){
+    public boolean existsById(int id){
         return categoriaRepository.existsById(id);
     }
 

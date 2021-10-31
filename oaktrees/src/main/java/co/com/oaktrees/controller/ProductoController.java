@@ -27,7 +27,7 @@ public class ProductoController {
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<Producto> getById(@PathVariable("id") String id) {
+    public ResponseEntity<Producto> getById(@PathVariable("id") int id) {
         if (!productoService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         Producto producto = productoService.getOne(id).get();
@@ -44,7 +44,7 @@ public class ProductoController {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ProductoDTO productoDTO) {
-        if (productoService.existsById(productoDTO.getNombre()))
+        if (productoService.existsByNombre(productoDTO.getNombre()))
             return new ResponseEntity<>(new Mensaje("Ese producto ya existe"), HttpStatus.BAD_REQUEST);
         if (StringUtils.isBlank(productoDTO.getNombre()))
             return new ResponseEntity<>(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
@@ -56,7 +56,7 @@ public class ProductoController {
             return new ResponseEntity<>(new Mensaje("La imagen es obligatoria"), HttpStatus.BAD_REQUEST);
         if (StringUtils.isBlank(productoDTO.getIdCategoria()))
             return new ResponseEntity<>(new Mensaje("La categoría es obligatoria"), HttpStatus.BAD_REQUEST);
-        Producto producto = new Producto(productoDTO.getIdProducto(),productoDTO.getDescripcion(),
+        Producto producto = new Producto(productoDTO.getNombre(),productoDTO.getDescripcion(),
                 productoDTO.getPrecio(),productoDTO.getColor(),productoDTO.getImagen(), productoDTO.getEstado(),
                 productoDTO.getVisibilidad(), productoDTO.getCantidad(), productoDTO.getIdCategoria(),
                 productoDTO.getIdCarrito());
@@ -65,7 +65,7 @@ public class ProductoController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") String id, @RequestBody ProductoDTO productoDTO) {
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody ProductoDTO productoDTO) {
         if (!productoService.existsById(id))
             return new ResponseEntity(new Mensaje("El producto no existe"), HttpStatus.NOT_FOUND);
         if (productoService.existsByNombre(productoDTO.getNombre()) && productoService.getByNombre(productoDTO.getNombre()).get().getIdProducto() != id)
@@ -94,7 +94,7 @@ public class ProductoController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") String id) {
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
         if (!productoService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         productoService.delete(id);

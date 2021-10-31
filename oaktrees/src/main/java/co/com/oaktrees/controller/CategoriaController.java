@@ -27,7 +27,7 @@ public class CategoriaController {
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<Categoria> getById(@PathVariable("id") String id){
+    public ResponseEntity<Categoria> getById(@PathVariable("id") int id){
         if(!categoriaService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         Categoria categoria = categoriaService.getOne(id).get();
@@ -54,7 +54,7 @@ public class CategoriaController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id")String id, @RequestBody CategoriaDTO categoriaDTO){
+    public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody CategoriaDTO categoriaDTO){
         if(!categoriaService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         if(categoriaService.existsByNombre(categoriaDTO.getNombre()) && categoriaService.getByNombre(categoriaDTO.getNombre()).get().getId() != id)
@@ -68,7 +68,7 @@ public class CategoriaController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id")String id){
+    public ResponseEntity<?> delete(@PathVariable("id")int id){
         if(!categoriaService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         categoriaService.delete(id);

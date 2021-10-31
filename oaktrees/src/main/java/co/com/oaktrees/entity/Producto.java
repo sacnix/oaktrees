@@ -9,8 +9,8 @@ import javax.persistence.Id;
 public class Producto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String idProducto;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idProducto;
     private String nombre;
     private String descripcion;
     private float precio;
@@ -40,11 +40,11 @@ public class Producto {
 
     }
 
-    public String getIdProducto() {
+    public int getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(String idProducto) {
+    public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
     }
 

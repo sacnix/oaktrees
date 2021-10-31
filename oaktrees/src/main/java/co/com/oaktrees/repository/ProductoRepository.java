@@ -10,11 +10,11 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     Optional<Producto> findByNombre(String nombre);
 
-    Optional<Producto> findById(String id);
+    Optional<Producto> findByIdProducto(int idProducto);
 
-    boolean existsById(String id);
+    boolean existsByIdProducto(int id);
 
     boolean existsByNombre(String nombre);
 
-    void deleteById(String id);
+    void deleteByIdProducto(int id);
 }

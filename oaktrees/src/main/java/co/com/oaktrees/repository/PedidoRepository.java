@@ -7,13 +7,13 @@ import java.util.Optional;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
 
-    Optional<Pedido> findById(String idPedido);
+    Optional<Pedido> findByIdPedido(int idPedido);
 
     Optional<Pedido> findByIdUsuario(String idUsuario);
 
     boolean existsByIdUsuario(String idUsuario);
 
-    boolean existsById(String idPedido);
+    boolean existsByIdPedido(int idPedido);
 
-    void deleteById(String idPedido);
+    void deleteByIdPedido(int idPedido);
 }

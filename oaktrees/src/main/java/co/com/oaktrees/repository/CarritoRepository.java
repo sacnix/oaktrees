@@ -7,13 +7,13 @@ import java.util.Optional;
 
 public interface CarritoRepository extends JpaRepository<Carrito, Integer> {
 
-    Optional<Carrito> findById(String idCarrito);
+    Optional<Carrito> findByIdCarrito(int idCarrito);
 
     Optional<Carrito> findByIdUsuario(String idUsuario);
 
     boolean existsByIdUsuario(String idUsuario);
 
-    boolean existsById(String idCarrito);
+    boolean existsByIdCarrito(int idCarrito);
 
-    void deleteById(String idCarrito);
+    void deleteByIdCarrito(int idCarrito);
 }

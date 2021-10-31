@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class PedidoDTO {
 
-    private String idPedido;
     private Date fecha;
     private float valorTotal;
     private int idTipoEntrega;
@@ -22,14 +21,6 @@ public class PedidoDTO {
     }
 
     public PedidoDTO() {
-    }
-
-    public String getIdPedido() {
-        return idPedido;
-    }
-
-    public void setIdPedido(String idPedido) {
-        this.idPedido = idPedido;
     }
 
     public Date getFecha() {

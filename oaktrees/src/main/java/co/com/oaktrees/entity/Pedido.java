@@ -10,8 +10,8 @@ import java.util.Date;
 public class Pedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private String idPedido;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idPedido;
     private Date fecha;
     private float valorTotal;
     private int idTipoEntrega;
@@ -31,11 +31,11 @@ public class Pedido {
     public Pedido() {
     }
 
-    public String getIdPedido() {
+    public int getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(String idPedido) {
+    public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
 

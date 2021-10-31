@@ -20,8 +20,8 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
-    public Optional<Pedido> getOne(String id){
-        return pedidoRepository.findById(id);
+    public Optional<Pedido> getOne(int id){
+        return pedidoRepository.findByIdPedido(id);
     }
 
     public Optional<Pedido> getByIdUsuario(String idUsuario){
@@ -32,12 +32,12 @@ public class PedidoService {
         pedidoRepository.save(persona);
     }
 
-    public void delete(String id){
-        pedidoRepository.deleteById(id);
+    public void delete(int id){
+        pedidoRepository.deleteByIdPedido(id);
     }
 
-    public boolean existsById(String id){
-        return pedidoRepository.existsById(id);
+    public boolean existsById(int id){
+        return pedidoRepository.existsByIdPedido(id);
     }
 
     public boolean existsByIdUsuario(String idUsuario){

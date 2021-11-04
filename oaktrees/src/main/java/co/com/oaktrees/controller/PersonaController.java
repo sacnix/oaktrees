@@ -1,24 +1,85 @@
 package co.com.oaktrees.controller;
 
-import co.com.oaktrees.dto.Mensaje;
-import co.com.oaktrees.dto.PersonaDTO;
+import co.com.oaktrees.dto.*;
 import co.com.oaktrees.entity.Persona;
+import co.com.oaktrees.entity.Rol;
+import co.com.oaktrees.enums.RolNombre;
+import co.com.oaktrees.security.jwt.JwtProvider;
 import co.com.oaktrees.service.PersonaService;
-import org.apache.commons.lang3.StringUtils;
+import co.com.oaktrees.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
-@RequestMapping("/persona")
+@RequestMapping("/usuario")
 @CrossOrigin(origins = "http://localhost:4200")
 public class PersonaController {
 
     @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
     PersonaService personaService;
+
+    @Autowired
+    RolService rolService;
+
+    @Autowired
+    JwtProvider jwtProvider;
+
+    @PostMapping("/auth/nuevo")
+    public ResponseEntity<?> nuevo(@Valid @RequestBody NuevaPersona nuevaPersona, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors())
+            return new ResponseEntity(new Mensaje("campos mal puestos o email inválido"), HttpStatus.BAD_REQUEST);
+        if(personaService.existsByCorreo(nuevaPersona.getCorreo()))
+            return new ResponseEntity(new Mensaje("El correo electrónico ya se encuentra registrado"), HttpStatus.BAD_REQUEST);
+        Persona persona =
+                new Persona(nuevaPersona.getNombre(), nuevaPersona.getTelefono(), nuevaPersona.getCorreo(),
+                        passwordEncoder.encode(nuevaPersona.getClave()));
+        Set<Rol> roles = new HashSet<>();
+        roles.add(rolService.getByNombre(RolNombre.ROL_USER).get());
+        if(nuevaPersona.getRoles().contains("admin"))
+            roles.add(rolService.getByNombre(RolNombre.ROL_ADMIN).get());
+        if(nuevaPersona.getRoles().contains("vendedor"))
+            roles.add(rolService.getByNombre(RolNombre.ROL_VENDEDOR).get());
+        persona.setRoles(roles);
+        personaService.save(persona);
+        return new ResponseEntity(new Mensaje("Usuario creado exitosamente"), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/auth/login")
+    public ResponseEntity<JwtDTO> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return new ResponseEntity(new Mensaje("Los datos son incorrectos"), HttpStatus.BAD_REQUEST);
+        Authentication authentication =
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getCorreo(),
+                        loginUsuario.getClave()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtProvider.generarToken(authentication);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        JwtDTO jwtDTO = new JwtDTO(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+        return new ResponseEntity<>(jwtDTO, HttpStatus.OK);
+    }
+
+
 
     @GetMapping("/lista")
     public ResponseEntity<List<Persona>> list(){
@@ -26,6 +87,7 @@ public class PersonaController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    /**
     @GetMapping("/detail/{id}")
     public ResponseEntity<Persona> getById(@PathVariable("id") String id){
         if(!personaService.existsById(id))
@@ -93,5 +155,5 @@ public class PersonaController {
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         personaService.delete(id);
         return new ResponseEntity<>(new Mensaje("La cuenta ha sido eliminada correctamente"), HttpStatus.OK);
-    }
+    }}**/
 }

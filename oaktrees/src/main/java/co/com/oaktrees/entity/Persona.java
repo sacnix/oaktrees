@@ -1,35 +1,48 @@
 package co.com.oaktrees.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.sun.istack.NotNull;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Persona {
 
     @Id
-    private String idUsuario;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private int id;
+    @NotNull
     private String nombre;
+    @NotNull
     private String telefono;
+    @NotNull
+    @Column(unique = true)
+    private String correo;
+    @NotNull
     private String clave;
-    private int idRol;
+    @NotNull
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "usuarioRol", joinColumns = @JoinColumn(name = "id"),
+    inverseJoinColumns = @JoinColumn(name = "rolId"))
+    private Set<Rol> roles = new HashSet<>();
 
     public Persona() {
     }
 
-    public Persona(String idUsuario, String nombre, String telefono, String clave, int idRol) {
-        this.idUsuario = idUsuario;
+    public Persona(String nombre, String telefono, String correo, String clave) {
         this.nombre = nombre;
         this.telefono = telefono;
+        this.correo = correo;
         this.clave = clave;
-        this.idRol = idRol;
     }
 
-    public String getIdUsuario() {
-        return idUsuario;
+    public int getId() {
+        return id;
     }
 
-    public void setIdUsuario(String idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -48,6 +61,14 @@ public class Persona {
         this.telefono = telefono;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     public String getClave() {
         return clave;
     }
@@ -56,11 +77,11 @@ public class Persona {
         this.clave = clave;
     }
 
-    public int getIdRol() {
-        return idRol;
+    public Set<Rol> getRoles() {
+        return roles;
     }
 
-    public void setIdRol(int idRol) {
-        this.idRol = idRol;
+    public void setRoles(Set<Rol> roles) {
+        this.roles = roles;
     }
 }

@@ -19,12 +19,13 @@ public class RolController {
 
     @Autowired
     RolService rolService;
-
+/**
     @GetMapping("/lista")
     public ResponseEntity<List<Rol>> list(){
         List<Rol> list = rolService.list();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
 
     @GetMapping("/detail/{id}")
     public ResponseEntity<Rol> getById(@PathVariable("id") int id){
@@ -73,5 +74,5 @@ public class RolController {
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         rolService.delete(id);
         return new ResponseEntity<>(new Mensaje("Rol eliminado correctamente"), HttpStatus.OK);
-    }
+    }**/
 }

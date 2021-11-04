@@ -1,6 +1,7 @@
 package co.com.oaktrees.service;
 
 import co.com.oaktrees.entity.Rol;
+import co.com.oaktrees.enums.RolNombre;
 import co.com.oaktrees.repository.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,23 +25,12 @@ public class RolService {
         return rolRepository.findById(id);
     }
 
-    public Optional<Rol> getByNombre(String nombre){
-        return rolRepository.findByNombre(nombre);
+    public Optional<Rol> getByNombre(RolNombre rolNombre){
+        return rolRepository.findByRolNombre(rolNombre);
     }
 
     public void save(Rol rol){
         rolRepository.save(rol);
     }
 
-    public void delete(int id){
-        rolRepository.deleteById(id);
-    }
-
-    public boolean existsById(int id){
-        return rolRepository.existsById(id);
-    }
-
-    public boolean existsByNombre(String nombre){
-        return rolRepository.existsByNombre(nombre);
-    }
 }

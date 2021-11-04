@@ -2,18 +2,20 @@ package co.com.oaktrees.repository;
 
 import co.com.oaktrees.entity.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface PersonaRepository extends JpaRepository<Persona, Integer> {
 
     Optional<Persona> findByNombre(String nombre);
 
-    Optional<Persona> findByIdUsuario(String idUsuario);
+    Optional<Persona> findByCorreo(String correo);
 
-    boolean existsByIdUsuario(String idUsuario);
+    boolean existsByCorreo(String correo);
 
     boolean existsByNombre(String nombre);
 
-    void deleteByIdUsuario(String idUsuario);
+    void deleteByCorreo(String correo);
 }

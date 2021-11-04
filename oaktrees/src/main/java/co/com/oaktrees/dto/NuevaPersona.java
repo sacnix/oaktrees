@@ -2,8 +2,10 @@ package co.com.oaktrees.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
-public class PersonaDTO {
+public class NuevaPersona {
 
     @NotBlank
     private String nombre;
@@ -14,18 +16,7 @@ public class PersonaDTO {
     private String correo;
     @NotBlank
     private String clave;
-
-
-    public PersonaDTO() {
-    }
-
-    public PersonaDTO(String nombre, String telefono, String correo, String clave) {
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.correo = correo;
-        this.clave = clave;
-    }
-
+    private Set<String> roles = new HashSet<>();
 
     public String getNombre() {
         return nombre;
@@ -57,5 +48,13 @@ public class PersonaDTO {
 
     public void setClave(String clave) {
         this.clave = clave;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 }

@@ -1,5 +1,8 @@
 package co.com.oaktrees.entity;
 
+import co.com.oaktrees.enums.RolNombre;
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,13 +11,15 @@ public class Rol {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
-    private String nombre;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private RolNombre rolNombre;
 
     public Rol() {
     }
 
-    public Rol(String nombre) {
-        this.nombre = nombre;
+    public Rol(RolNombre rolNombre) {
+        this.rolNombre = rolNombre;
     }
 
     public int getId() {
@@ -25,11 +30,11 @@ public class Rol {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public RolNombre getRolNombre() {
+        return rolNombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setRolNombre(RolNombre rolNombre) {
+        this.rolNombre = rolNombre;
     }
 }

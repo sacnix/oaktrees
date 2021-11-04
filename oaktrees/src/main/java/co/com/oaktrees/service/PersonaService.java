@@ -20,8 +20,8 @@ public class PersonaService {
         return personaRepository.findAll();
     }
 
-    public Optional<Persona> getOne(String id){
-        return personaRepository.findByIdUsuario(id);
+    public Optional<Persona> getOne(String correo){
+        return personaRepository.findByCorreo(correo);
     }
 
     public Optional<Persona> getByNombre(String nombre){
@@ -32,12 +32,12 @@ public class PersonaService {
         personaRepository.save(persona);
     }
 
-    public void delete(String id){
-        personaRepository.deleteByIdUsuario(id);
+    public void delete(String correo){
+        personaRepository.deleteByCorreo(correo);
     }
 
-    public boolean existsById(String id){
-        return personaRepository.existsByIdUsuario(id);
+    public boolean existsByCorreo(String correo){
+        return personaRepository.existsByCorreo(correo);
     }
 
     public boolean existsByNombre(String nombre){

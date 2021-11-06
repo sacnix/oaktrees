@@ -1,36 +1,32 @@
-<div id="encabezado"></div>
-
-<main class="form-signin">
-  <form>
-    <h1 class="h3 mb-3 fw-normal">Crear cuenta</h1>
-
-    <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Correo electrónico</label>
+<app-menu></app-menu>
+<main>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-4 mx-auto">
+        <form (ngSubmit)="onRegister()" novalidate #f="ngForm">
+          <div class="form-floating space-input-oak">
+            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="nombre" required>
+            <label for="nombre">Nombres</label>
+          </div>
+          <div class="form-floating space-input-oak">
+            <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="telefono" required>
+            <label for="telefono">Teléfono</label>
+          </div>
+          <div class="form-floating space-input-oak">
+            <input type="text" class="form-control" id="correo" name="correo" [(ngModel)]="correo" required>
+            <label for="correo">Correo</label>
+          </div>
+          <div class="form-floating space-input-oak">
+            <input type="password" class="form-control" id="clave" name="clave" [(ngModel)]="clave" required>
+            <label for="clave">Clave</label>
+          </div>
+          <button class="w-100 btn btn-lg btn-primary-oak space-input-oak btn-block" [disabled]="!f.valid">Crear cuenta</button>
+        </form>
+      </div>
     </div>
 
-    <div class="form-floating space-input-oak">
-      <input type="text" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingInputValue">Nombres</label>
-    </div>
+  </div>
 
-    <div class="form-floating space-input-oak">
-      <input type="text" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingInputValue">Teléfono</label>
-    </div>
-
-    <div class="form-floating space-input-oak">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Contraseña</label>
-    </div>
-
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Confirmar contraseña</label>
-    </div>
-
-    <button class="w-100 btn btn-lg btn-primary-oak" type="submit">Crear cuenta</button>
-  </form>
 </main>
 <hr class="featurette-divider">
 <div id="pie"></div>

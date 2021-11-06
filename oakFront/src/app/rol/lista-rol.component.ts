@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Rol } from '../models/rol';
 import { RolService } from '../service/rol.service';
+import { TokenService } from '../service/token.service';
 
 @Component({
   selector: 'app-lista-rol',
@@ -12,13 +13,26 @@ import { RolService } from '../service/rol.service';
 export class ListaRolComponent implements OnInit {
 
   rol: Rol[] = [];
+  roles: string[] = [];
+  isAdmin = false;
+  isVendedor = false;
 
   constructor(private rolService: RolService,
-    private toastr: ToastrService
-    ) { }
+    private toastr: ToastrService,
+    private tokenService: TokenService
+  ) { }
 
   ngOnInit(): void {
     this.cargarRoles();
+    this.roles = this.tokenService.getAuthorities();
+    this.roles.forEach(rol => {
+      if (rol === 'ROL_ADMIN') {
+        this.isAdmin = true;
+      }
+      if (rol === 'ROL_VENDEDOR') {
+        this.isVendedor = true;
+      }
+    });
   }
 
   cargarRoles(): void {
@@ -34,7 +48,7 @@ export class ListaRolComponent implements OnInit {
 
   borrar(id: any) {
     this.rolService.delete(id).subscribe(
-      data =>{
+      data => {
         this.toastr.success('Producto eliminado', 'OK', {
           timeOut: 3000, positionClass: 'toast-top-center'
         });
@@ -42,7 +56,7 @@ export class ListaRolComponent implements OnInit {
       },
       err => {
         this.toastr.error(err.error.mensaje, 'Fail', {
-          timeOut: 3000,  positionClass: 'toast-top-center',
+          timeOut: 3000, positionClass: 'toast-top-center',
         });
       }
     );

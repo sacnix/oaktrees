@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" >
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/">
+        <img src="../assets/logotipo.png" alt="" width="170" style="border-radius:50%;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item" *ngIf="isLogged">
+            <a class="nav-link" aria-current="page" routerLink="/usuarios">Ir a Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="/catalogo">Catálogo</a>
+          </li>
+          <li class="nav-item" *ngIf="isLogged">
+            <a class="nav-link" href="#">Carrito</a>
+          </li>
+          <li class="nav-item" *ngIf="isLogged">
+            <a class="nav-link" href="#">Pedidos</a>
+          </li>
+          <li class="nav-item dropdown" >
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Cuenta
+            </a>
+            <ul class="dropdown-menu">
+              <li *ngIf="!isLogged"><a class="dropdown-item" routerLink="/login">Iniciar sesión</a></li>
+              <li *ngIf="isLogged"><a class="dropdown-item" routerLink="/mi-cuenta/{{persona.correo}}">Mi cuenta</a></li>
+              <li *ngIf="isLogged"><a class="dropdown-item" routerLink="/cambiar-clave/{{persona.correo}}">Cambiar clave</a></li>
+              <li *ngIf="isLogged" (click)="onLogOut()"><a class="dropdown-item">Cerrar sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

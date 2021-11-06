@@ -8,14 +8,15 @@ import java.util.Set;
 public class NuevaPersona {
 
     @NotBlank
-    private String nombre;
-    @NotBlank
-    private String telefono;
+    private String clave;
     @NotBlank
     @Email
     private String correo;
     @NotBlank
-    private String clave;
+    private String nombre;
+    @NotBlank
+    private String telefono;
+
     private Set<String> roles = new HashSet<>();
 
     public String getNombre() {

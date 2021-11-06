@@ -1,40 +1,38 @@
-<div id="encabezado"></div>
+<app-menu></app-menu>
 
 <main class="form-signin">
-  <form action="frm_eliminarCuenta.html">
+  <form  #f="ngForm" *ngIf="persona">
     <h1 class="h3 mb-3 fw-normal">Mi cuenta</h1>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Nombre</label>
-      <input type="text" value="User" class="form-control" id="exampleInputPassword1">
+    <div class="form-floating space-input-oak">
+      <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="persona.nombre" required>
+      <label for="nombre">Nombres</label>
+    </div>
+    <div class="form-floating space-input-oak">
+      <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="persona.telefono" required>
+      <label for="telefono">Teléfono</label>
     </div>
     <fieldset disabled>
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Correo electrónico
-        </label>
-        <input type="text" value="test1@gmail.com" class="form-control" id="disabledTextInput" aria-describedby="emailHelp">
-      </div>
-    </fieldset>
-
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Teléfono</label>
-      <input type="text" value="5902341" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div class="form-floating space-input-oak">
+      <input type="text" class="form-control" id="correo" name="correo" [(ngModel)]="persona.correo" required>
+      <label for="correo">Correo</label>
     </div>
+  </fieldset>
     <fieldset disabled>
-      <div class="mb-3">
-        <label for="disabledTextInput" class="form-label">Contraseña</label>
-        <input type="password" value="123456" id="disabledTextInput" class="form-control">
-      </div>
-    </fieldset>
+    <div class="form-floating space-input-oak">
+      <input type="password" class="form-control" id="clave" name="clave" [(ngModel)]="persona.clave" required>
+      <label for="clave">Clave</label>
+    </div>
+  </fieldset>
 
     <div class="row">
       <div class="col text-center">
         <button type="submit" class="btn btn-secundary-oak">Eliminar cuenta</button>
       </div>
       <div class="col text-center">
-        <button type="submit" class="btn btn-primary-oak">Actualizar</button>
+        <button (ngSubmit)="onUpdate()" novalidate class="btn btn-primary-oak">Actualizar</button>
       </div>
     </div>
   </form>
 </main>
 <hr class="featurette-divider">
-<div id="pie"></div>
+

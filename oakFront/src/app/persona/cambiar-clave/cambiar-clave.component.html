@@ -1,21 +1,19 @@
+<app-menu></app-menu>
 <div id="encabezado"></div>
-
+<div *ngIf="persona">
 <main class="form-signin">
-  <form>
+  <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
     <h1 class="h3 mb-3 fw-normal">Cambiar contraseña</h1>
 
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Contraseña</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Confirmar contraseña</label>
+    <div class="form-floating space-input-oak">
+      <input type="password" class="form-control" id="clave" name="clave" [(ngModel)]="clave" required>
+      <label for="clave">Clave</label>
     </div>
 
-    <button class="w-100 btn btn-lg btn-primary-oak" type="submit">Cambiar clave</button>
+    <button class="w-100 btn btn-lg btn-primary-oak btn-block" [disabled]="!f.valid">Cambiar clave</button>
   </form>
 </main>
+</div>
 <hr class="featurette-divider">
 <div id="pie"></div>
 

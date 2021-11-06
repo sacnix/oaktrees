@@ -1,31 +1,41 @@
-<div id="encabezado"></div>
+<app-menu></app-menu>
+<div class="text-center" *ngIf="isLogged; else loggedOut">
+  <h2>Ya has iniciado sesión</h2>
+</div>
+<ng-template #loggedOut>
+  <main class="form-signin">
+    <div class="container d-flex justify-content-center">
 
-<main class="form-signin">
-  <form>
-    <h1 class="h3 mb-3 fw-normal">Iniciar sesión</h1>
+      <form #f="ngForm" (ngSubmit)="onLogin()" novalidate>
+        <h1 class="h3 mb-3 fw-normal text-center">Iniciar sesión</h1>
 
-    <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Correo electrónico</label>
+        <div class="form-floating space-input-oak">
+          <input type="text" class="form-control" id="correo" name="correo" [(ngModel)]="correo" required>
+          <label for="correo">Correo electrónico</label>
+        </div>
+        <div class="form-floating space-input-oak">
+          <input type="password" class="form-control" id="clave" name="clave" [(ngModel)]="clave" required>
+          <label for="clave">Contraseña</label>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col text-start">
+              <p><a routerLink="/registro" style="cursor: pointer" class="pe-auto link-oak">Crear cuenta</a></p>
+            </div>
+            <div class="col text-end">
+              <p><a routerLink="/recordar-clave" style="cursor: pointer" class="pe-auto link-oak">Recordar clave</a></p>
+            </div>
+          </div>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary-oak" [disabled]="!f.valid">Iniciar sesión</button>
+      </form>
     </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Contraseña</label>
-    </div>
-
     <div class="container">
-      <div class="row">
-        <div class="col text-start">
-          <p><a href="frm_crearCuenta.html" class="pe-auto link-oak">Crear cuenta</a></p>
-        </div>
-        <div class="col text-end">
-          <p><a href="frm_recordarClave.html" class="pe-auto link-oak">Recordar clave</a></p>
-        </div>
-      </div>
+      <div *ngIf="f.submitted && isLoginFail" class="alert alert-danger mt-2 text-center">Error al iniciar sesión:
+        {{mensajeError}}</div>
     </div>
 
-    <button class="w-100 btn btn-lg btn-primary-oak" type="submit">Iniciar sesión</button>
-  </form>
-</main>
-<hr class="featurette-divider">
-<div id="pie"></div>
+  </main>
+</ng-template>

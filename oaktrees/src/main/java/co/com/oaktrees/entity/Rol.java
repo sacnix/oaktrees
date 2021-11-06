@@ -1,7 +1,7 @@
 package co.com.oaktrees.entity;
 
 import co.com.oaktrees.enums.RolNombre;
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 

@@ -7,6 +7,7 @@ import { ListaRolComponent } from './rol/lista-rol.component';
 import { DetalleRolComponent } from './rol/detalle-rol.component';
 import { NuevoRolComponent } from './rol/nuevo-rol.component';
 import { EditarRolComponent } from './rol/editar-rol.component';
+import { interceporProvider } from './interceptors/prod-interceptor.service';
 
 //para consumar API y el formulario
 import { HttpClientModule } from '@angular/common/http';
@@ -36,6 +37,7 @@ import { HistoricoPedidoComponent } from './pedido/historico-pedidos/historico-p
 import { EditarPedidoAdminComponent } from './pedido/editar-pedido-admin/editar-pedido-admin.component';
 import { EditarPedidoComponent } from './pedido/editar-pedido/editar-pedido.component';
 import { ListarPedidosComponent } from './pedido/listar-pedidos/listar-pedidos.component';
+import { MenuComponent } from './menu/menu.component';
 
 
 @NgModule({
@@ -65,7 +67,8 @@ import { ListarPedidosComponent } from './pedido/listar-pedidos/listar-pedidos.c
     HistoricoPedidoComponent,
     EditarPedidoAdminComponent,
     EditarPedidoComponent,
-    ListarPedidosComponent
+    ListarPedidosComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,7 @@ import { ListarPedidosComponent } from './pedido/listar-pedidos/listar-pedidos.c
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [interceporProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

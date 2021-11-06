@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,6 +43,7 @@ public class CategoriaController {
         return new ResponseEntity<>(categoria, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('VENDEDOR')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CategoriaDTO categoriaDTO){
         if(StringUtils.isBlank(categoriaDTO.getNombre()))
@@ -53,6 +55,7 @@ public class CategoriaController {
         return new ResponseEntity<>(new Mensaje("Categoría creada correctamente"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('VENDEDOR')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody CategoriaDTO categoriaDTO){
         if(!categoriaService.existsById(id))
@@ -67,6 +70,7 @@ public class CategoriaController {
         return new ResponseEntity<>(new Mensaje("Categoría actualizada correctamente"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('VENDEDOR')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id")int id){
         if(!categoriaService.existsById(id))

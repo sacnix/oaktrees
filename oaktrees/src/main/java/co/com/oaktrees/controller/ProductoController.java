@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,6 +43,8 @@ public class ProductoController {
         return new ResponseEntity<>(producto, HttpStatus.OK);
     }
 
+
+    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('VENDEDOR')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ProductoDTO productoDTO) {
         if (productoService.existsByNombre(productoDTO.getNombre()))
@@ -64,6 +67,7 @@ public class ProductoController {
         return new ResponseEntity<>(new Mensaje("El producto ha sido creado correctamente"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('VENDEDOR')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody ProductoDTO productoDTO) {
         if (!productoService.existsById(id))
@@ -93,6 +97,7 @@ public class ProductoController {
         return new ResponseEntity<>(new Mensaje("El producto ha sido actualizado correctamente"), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('VENDEDOR')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") int id) {
         if (!productoService.existsById(id))

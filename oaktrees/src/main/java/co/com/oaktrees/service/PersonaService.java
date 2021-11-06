@@ -21,7 +21,8 @@ public class PersonaService {
     }
 
     public Optional<Persona> getOne(String correo){
-        return personaRepository.findByCorreo(correo);
+        Optional<Persona> persona = personaRepository.findByCorreo(correo);
+        return persona;
     }
 
     public Optional<Persona> getByNombre(String nombre){

@@ -1,6 +1,6 @@
 package co.com.oaktrees.entity;
 
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -23,18 +23,19 @@ public class Persona {
     private String clave;
     @NotNull
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "usuarioRol", joinColumns = @JoinColumn(name = "id"),
-    inverseJoinColumns = @JoinColumn(name = "rolId"))
+    @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id"))
     private Set<Rol> roles = new HashSet<>();
 
     public Persona() {
     }
 
     public Persona(String nombre, String telefono, String correo, String clave) {
+        this.clave = clave;
+        this.correo = correo;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.correo = correo;
-        this.clave = clave;
+
     }
 
     public int getId() {

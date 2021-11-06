@@ -10,6 +10,7 @@ import co.com.oaktrees.service.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -52,8 +53,8 @@ public class PersonaController {
         if(personaService.existsByCorreo(nuevaPersona.getCorreo()))
             return new ResponseEntity(new Mensaje("El correo electrónico ya se encuentra registrado"), HttpStatus.BAD_REQUEST);
         Persona persona =
-                new Persona(nuevaPersona.getNombre(), nuevaPersona.getTelefono(), nuevaPersona.getCorreo(),
-                        passwordEncoder.encode(nuevaPersona.getClave()));
+                new Persona(nuevaPersona.getNombre(), nuevaPersona.getTelefono(),
+                 nuevaPersona.getCorreo(), passwordEncoder.encode(nuevaPersona.getClave()));
         Set<Rol> roles = new HashSet<>();
         roles.add(rolService.getByNombre(RolNombre.ROL_USER).get());
         if(nuevaPersona.getRoles().contains("admin"))
@@ -74,27 +75,42 @@ public class PersonaController {
                         loginUsuario.getClave()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtProvider.generarToken(authentication);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        JwtDTO jwtDTO = new JwtDTO(jwt, userDetails.getUsername(), userDetails.getAuthorities());
-        return new ResponseEntity<>(jwtDTO, HttpStatus.OK);
+        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+        JwtDTO jwtDto = new JwtDTO(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+        return new ResponseEntity(jwtDto, HttpStatus.OK);
     }
 
 
-
+    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('VENDEDOR')")
     @GetMapping("/lista")
     public ResponseEntity<List<Persona>> list(){
         List<Persona> list = personaService.list();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    /**
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<Persona> getById(@PathVariable("id") String id){
-        if(!personaService.existsById(id))
-            return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
-        Persona persona = personaService.getOne(id).get();
+    @GetMapping("/detail/{correo}")
+    public ResponseEntity<Persona> getById(@PathVariable("correo") String correo){
+        if(!personaService.existsByCorreo(correo))
+            return new ResponseEntity(new Mensaje("Usuario no existe"), HttpStatus.NOT_FOUND);
+        Persona persona = personaService.getOne(correo).get();
         return new ResponseEntity<>(persona, HttpStatus.OK);
     }
+
+    @PutMapping("/cambiar-clave/{correo}")
+    public ResponseEntity<?> cambiarClave(@PathVariable("correo")String correo, @RequestBody PersonaDTO personaDTO){
+        if(!personaService.existsByCorreo(correo))
+            return new ResponseEntity(new Mensaje("El usuario no existe"), HttpStatus.NOT_FOUND);
+        Persona persona = personaService.getOne(correo).get();
+        persona.setNombre(personaDTO.getNombre());
+        persona.setTelefono(personaDTO.getTelefono());
+        persona.setCorreo(personaDTO.getCorreo());
+        persona.setClave(passwordEncoder.encode(personaDTO.getClave()));
+        personaService.save(persona);
+        return new ResponseEntity<>(new Mensaje("La clave ha sido actualizado correctamente"), HttpStatus.OK);
+    }
+
+    /**
+
 
     @GetMapping("/detailname/{nombre}")
     public ResponseEntity<Persona> getByNombre(@PathVariable("nombre") String nombre){

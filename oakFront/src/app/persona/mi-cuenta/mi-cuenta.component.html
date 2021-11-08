@@ -1,8 +1,8 @@
 <app-menu></app-menu>
 
 <main class="form-signin">
-  <form  #f="ngForm" *ngIf="persona">
-    <h1 class="h3 mb-3 fw-normal">Mi cuenta</h1>
+  <form  (ngSubmit)="onUpdate()" novalidate #f="ngForm" *ngIf="persona">
+    <h1 class="h3 mb-3 fw-normal text-center">Mi cuenta</h1>
     <div class="form-floating space-input-oak">
       <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="persona.nombre" required>
       <label for="nombre">Nombres</label>
@@ -26,13 +26,9 @@
 
     <div class="row">
       <div class="col text-center">
-        <button type="submit" class="btn btn-secundary-oak">Eliminar cuenta</button>
-      </div>
-      <div class="col text-center">
-        <button (ngSubmit)="onUpdate()" novalidate class="btn btn-primary-oak">Actualizar</button>
+        <button novalidate class="btn btn-primary-oak space-input-oak" [disabled]="!f.valid">Actualizar Cuenta</button>
       </div>
     </div>
   </form>
 </main>
-<hr class="featurette-divider">
 

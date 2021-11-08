@@ -15,9 +15,6 @@ export class MiCuentaComponent implements OnInit {
   isLogged = false;
   rol: any = null;
   persona: any = null;
-  nombre= '';
-  telefono= '';
-  clave= '';
   correo= '';
 
   constructor(
@@ -51,7 +48,6 @@ export class MiCuentaComponent implements OnInit {
 
   onUpdate(): void{
     const correo = this.activatedRoute.snapshot.params.correo;
-    this.persona = new Persona(this.nombre, this.telefono, this.persona.correo, this.clave);
     this.personaService.cambiarClave(correo, this.persona).subscribe(
       data => {
         this.toastr.success('Se han actualizado los datos de la cuenta', 'OK', {

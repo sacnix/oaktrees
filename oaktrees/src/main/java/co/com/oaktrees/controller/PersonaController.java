@@ -80,8 +80,6 @@ public class PersonaController {
         return new ResponseEntity(jwtDto, HttpStatus.OK);
     }
 
-
-    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('VENDEDOR')")
     @GetMapping("/lista")
     public ResponseEntity<List<Persona>> list(){
         List<Persona> list = personaService.list();
@@ -108,6 +106,15 @@ public class PersonaController {
         personaService.save(persona);
         return new ResponseEntity<>(new Mensaje("La clave ha sido actualizado correctamente"), HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{correo}")
+    public ResponseEntity<?> delete(@PathVariable("correo")String correo){
+        if(!personaService.existsByCorreo(correo))
+            return new ResponseEntity(new Mensaje("No existe el usuario"), HttpStatus.NOT_FOUND);
+        personaService.delete(correo);
+        return new ResponseEntity<>(new Mensaje("La cuenta ha sido eliminada correctamente"), HttpStatus.OK);
+    }
+
 
     /**
 
@@ -165,11 +172,5 @@ public class PersonaController {
         return new ResponseEntity<>(new Mensaje("El usuario ha sido actualizado correctamente"), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id")String id){
-        if(!personaService.existsById(id))
-            return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
-        personaService.delete(id);
-        return new ResponseEntity<>(new Mensaje("La cuenta ha sido eliminada correctamente"), HttpStatus.OK);
-    }}**/
+    **/
 }

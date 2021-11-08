@@ -34,7 +34,6 @@ export class CambiarClaveComponent implements OnInit {
     this.personaService.detail(correo).subscribe(
       data => {
         this.persona = data;
-        console.log('id '+ this.persona.nombre);
       },
       err => {
         this.toastr.error(err.error.mensaje, 'Fail', {
@@ -47,8 +46,6 @@ export class CambiarClaveComponent implements OnInit {
 
   onUpdate(): void{
     const correo = this.activatedRoute.snapshot.params.correo;
-    console.log('corr '+ correo);
-    console.log('corr '+ this.clave);
     this.persona = new Persona(this.persona.nombre, this.persona.telefono, this.persona.correo, this.clave);
     this.personaService.cambiarClave(correo, this.persona).subscribe(
       data => {

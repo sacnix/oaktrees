@@ -1,51 +1,48 @@
-<div id="encabezado"></div>
-
-<main class="form-signin">
-  <form action="usuarios.html">
-    <h1 class="h3 mb-3 fw-normal">Usuarios</h1>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Nombre</label>
-      <input type="text" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Correo electrónico
-      </label>
-      <input type="text" class="form-control" aria-describedby="emailHelp">
-    </div>
-
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Teléfono</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div>
-    <div class="mb-3">
-      <label for="disabledTextInput" class="form-label">Contraseña</label>
-      <input type="password" class="form-control">
-    </div>
-
-    <div class="mb-3">
-      <label for="disabledTextInput" class="form-label">Confirmar contraseña</label>
-      <input type="password" class="form-control">
-    </div>
-
-    <div class="mb-3">
-      <label for="disabledTextInput" class="form-label">Rol</label>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Selecciona una opción</option>
-        <option value="1">Usuario</option>
-        <option value="2">Administrador</option>
-        <option value="3">Vendedor</option>
-      </select>
-    </div>
-
-    <div class="row">
-      <div class="col text-center">
-        <button type="submit" class="btn btn-secundary-oak">Cancelar</button>
-      </div>
-      <div class="col text-center">
-        <button type="submit" class="btn btn-primary-oak">Crear cuenta</button>
+<app-menu></app-menu>
+<main>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-4 mx-auto">
+        <form (ngSubmit)="onRegister()" novalidate #f="ngForm">
+          <h1 class="h3 mb-3 fw-normal text-center">Crear Usuario</h1>
+          <div class="form-floating space-input-oak">
+            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="nombre" required>
+            <label for="nombre">Nombres</label>
+          </div>
+          <div class="form-floating space-input-oak">
+            <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="telefono" required>
+            <label for="telefono">Teléfono</label>
+          </div>
+          <div class="form-floating space-input-oak">
+            <input type="text" class="form-control" id="correo" name="correo" [(ngModel)]="correo" required>
+            <label for="correo">Correo</label>
+          </div>
+          <div class="form-floating space-input-oak">
+            <input type="password" class="form-control" id="clave" name="clave" [(ngModel)]="clave" required>
+            <label for="clave">Clave</label>
+          </div>
+          <div class="mb-3 space-input-oak">
+            <label for="disabledTextInput" class="form-label">Rol</label>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Selecciona una opción</option>
+              <option value="1">Usuario</option>
+              <option value="2">Administrador</option>
+              <option value="3">Vendedor</option>
+            </select>
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-secundary-oak space-input-oak" routerLink="/usuarios">Volver</button>
+            </div>
+            <div class="col text-center">
+              <button novalidate class="btn btn-primary-oak space-input-oak btn-block" [disabled]="!f.valid">Crear cuenta</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-  </form>
+
+  </div>
+
 </main>
-<hr class="featurette-divider">
-<div id="pie"></div>
+

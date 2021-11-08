@@ -3,17 +3,15 @@
 <div *ngIf="persona">
 <main class="form-signin">
   <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
-    <h1 class="h3 mb-3 fw-normal">Cambiar contraseña</h1>
+    <h1 class="h3 mb-3 fw-normal text-center">Cambiar contraseña</h1>
 
     <div class="form-floating space-input-oak">
       <input type="password" class="form-control" id="clave" name="clave" [(ngModel)]="clave" required>
-      <label for="clave">Clave</label>
+      <label for="clave">Nueva clave</label>
     </div>
 
-    <button class="w-100 btn btn-lg btn-primary-oak btn-block" [disabled]="!f.valid">Cambiar clave</button>
+    <button class="w-100 btn btn-lg btn-primary-oak btn-block space-input-oak" [disabled]="!f.valid">Cambiar clave</button>
   </form>
 </main>
 </div>
-<hr class="featurette-divider">
-<div id="pie"></div>
 

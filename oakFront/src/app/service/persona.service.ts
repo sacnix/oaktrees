@@ -19,4 +19,12 @@ export class PersonaService {
   public cambiarClave(correo: string, persona: Persona): Observable<any> {
     return this.httpClient.put<any>(this.personaURL + `cambiar-clave/${correo}`, persona);
   }
+
+  public listaUsuarios(): Observable<Persona[]> {
+    return this.httpClient.get<Persona[]>(this.personaURL + 'lista');
+  }
+
+  public deleteUsuario(correo: string): Observable<any> {
+    return this.httpClient.delete<any>(this.personaURL + `delete/${correo}`);
+  }
 }

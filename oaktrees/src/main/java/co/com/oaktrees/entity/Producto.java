@@ -1,9 +1,7 @@
 package co.com.oaktrees.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Producto {
@@ -15,25 +13,23 @@ public class Producto {
     private String descripcion;
     private float precio;
     private String color;
-    private String imagen;
+    private String imagenUrl;
+    private String imagenId;
     private int estado;
     private int visibilidad;
     private int cantidad;
-    private String idCategoria;
-    private String idCarrito;
 
-    public Producto(String nombre, String descripcion, float precio, String color, String imagen, int estado,
-                    int visibilidad, int cantidad, String idCategoria, String idCarrito) {
+    public Producto(String nombre, String descripcion, float precio, String color, String imagenUrl,
+                    String imagenId, int estado, int visibilidad, int cantidad) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.color = color;
-        this.imagen = imagen;
+        this.imagenUrl = imagenUrl;
+        this.imagenId = imagenId;
         this.estado = estado;
         this.visibilidad = visibilidad;
         this.cantidad = cantidad;
-        this.idCategoria = idCategoria;
-        this.idCarrito = idCarrito;
     }
 
     public Producto() {
@@ -80,12 +76,20 @@ public class Producto {
         this.color = color;
     }
 
-    public String getImagen() {
-        return imagen;
+    public String getImagenUrl() {
+        return imagenUrl;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
+
+    public String getImagenId() {
+        return imagenId;
+    }
+
+    public void setImagenId(String imagenId) {
+        this.imagenId = imagenId;
     }
 
     public int getEstado() {
@@ -112,19 +116,4 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    public String getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(String idCategoria) {
-        this.idCategoria = idCategoria;
-    }
-
-    public String getIdCarrito() {
-        return idCarrito;
-    }
-
-    public void setIdCarrito(String idCarrito) {
-        this.idCarrito = idCarrito;
-    }
 }

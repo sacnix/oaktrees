@@ -4,6 +4,7 @@
     <div class="row mt-5">
       <div class="col-md-4 mx-auto">
         <form (ngSubmit)="onRegister()" novalidate #f="ngForm">
+          <h1 class="h3 mb-3 fw-normal text-center">Crear cuenta</h1>
           <div class="form-floating space-input-oak">
             <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="nombre" required>
             <label for="nombre">Nombres</label>

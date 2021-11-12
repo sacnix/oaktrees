@@ -41,7 +41,7 @@ public class EstadoPedidoController {
         EstadoPedido estadoPedido = estadoPedidoService.getByNombre(nombre).get();
         return new ResponseEntity<>(estadoPedido, HttpStatus.OK);
     }
-
+/**
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody EstadoPedidoDTO estadoPedidoDTO){
         if(StringUtils.isBlank(estadoPedidoDTO.getNombre()))
@@ -73,5 +73,5 @@ public class EstadoPedidoController {
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         estadoPedidoService.delete(id);
         return new ResponseEntity<>(new Mensaje("Rol eliminado correctamente"), HttpStatus.OK);
-    }
+    }**/
 }

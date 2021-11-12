@@ -6,20 +6,22 @@ public class ProductoDTO {
     private String descripcion;
     private float precio;
     private String color;
-    private String imagen;
+    private String imagenUrl;
+    private String imagenId;
     private int estado;
     private int visibilidad;
     private int cantidad;
     private String idCategoria;
     private String idCarrito;
 
-    public ProductoDTO(String nombre, String descripcion, float precio, String color, String imagen, int estado,
-                    int visibilidad, int cantidad, String idCategoria, String idCarrito) {
+    public ProductoDTO(String nombre, String descripcion, float precio, String color, String imagenUrl,
+                    String imagenId, int estado, int visibilidad, int cantidad, String idCategoria, String idCarrito) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.color = color;
-        this.imagen = imagen;
+        this.imagenUrl = imagenUrl;
+        this.imagenId = imagenId;
         this.estado = estado;
         this.visibilidad = visibilidad;
         this.cantidad = cantidad;
@@ -63,12 +65,20 @@ public class ProductoDTO {
         this.color = color;
     }
 
-    public String getImagen() {
-        return imagen;
+    public String getImagenUrl() {
+        return imagenUrl;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
+
+    public String getImagenId() {
+        return imagenId;
+    }
+
+    public void setImagenId(String imagenId) {
+        this.imagenId = imagenId;
     }
 
     public int getEstado() {

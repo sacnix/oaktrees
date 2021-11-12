@@ -1,9 +1,9 @@
 package co.com.oaktrees.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import co.com.oaktrees.enums.TipoEntregaNombre;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class TipoEntrega {
@@ -11,12 +11,15 @@ public class TipoEntrega {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idTipoEntrega;
-    private String nombre;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(unique = true)
+    private TipoEntregaNombre nombre;
 
     public TipoEntrega() {
     }
 
-    public TipoEntrega(String nombre) {
+    public TipoEntrega(TipoEntregaNombre nombre) {
         this.nombre = nombre;
     }
 
@@ -28,11 +31,11 @@ public class TipoEntrega {
         this.idTipoEntrega = idTipoEntrega;
     }
 
-    public String getNombre() {
+    public TipoEntregaNombre getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(TipoEntregaNombre nombre) {
         this.nombre = nombre;
     }
 }

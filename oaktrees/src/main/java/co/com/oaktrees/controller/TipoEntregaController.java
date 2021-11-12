@@ -41,7 +41,7 @@ public class TipoEntregaController {
         TipoEntrega tipoEntrega = tipoEntregaService.getByNombre(nombre).get();
         return new ResponseEntity<>(tipoEntrega, HttpStatus.OK);
     }
-
+/**
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody TipoEntregaDTO tipoEntregaDTO){
         if(StringUtils.isBlank(tipoEntregaDTO.getNombre()))
@@ -73,5 +73,5 @@ public class TipoEntregaController {
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
         tipoEntregaService.delete(id);
         return new ResponseEntity<>(new Mensaje("Tipo entrega eliminado correctamente"), HttpStatus.OK);
-    }
+    }**/
 }

@@ -1,9 +1,9 @@
 package co.com.oaktrees.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import co.com.oaktrees.enums.EstadoPedidoNombre;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class EstadoPedido {
@@ -11,12 +11,15 @@ public class EstadoPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEstado;
-    private String nombre;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(unique = true)
+    private EstadoPedidoNombre nombre;
 
     public EstadoPedido() {
     }
 
-    public EstadoPedido(String nombre) {
+    public EstadoPedido(EstadoPedidoNombre nombre) {
         this.nombre = nombre;
     }
 
@@ -28,11 +31,11 @@ public class EstadoPedido {
         this.idEstado = idEstado;
     }
 
-    public String getNombre() {
+    public EstadoPedidoNombre getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(EstadoPedidoNombre nombre) {
         this.nombre = nombre;
     }
 }

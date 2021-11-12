@@ -7,36 +7,36 @@
   <div class="container">
     <div class="row mt-2">
       <div class="col-md-4 mx-auto">
-        <form (ngSubmit)="onUpdate()" novalidate enctype="multipart/form-data" #f="ngForm" *ngIf="producto">
+        <form (ngSubmit)="onUpload()" novalidate enctype="multipart/form-data" #f="ngForm">
           <h1 class="h3 mb-3 fw-normal text-center">Crear producto</h1>
           <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="producto.nombre" required>
+            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="nombre" required>
             <label for="nombre">Nombres</label>
           </div>
           <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="producto.descripcion"
+            <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="descripcion"
               required>
             <label for="telefono">Descripción</label>
           </div>
           <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="precio" name="precio" [(ngModel)]="producto.precio" required>
+            <input type="text" class="form-control" id="precio" name="precio" [(ngModel)]="precio" required>
             <label for="precio">Precio</label>
           </div>
           <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="color" name="color" [(ngModel)]="producto.color" required>
+            <input type="text" class="form-control" id="color" name="color" [(ngModel)]="color" required>
             <label for="color">Color</label>
           </div>
           <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="estado" name="estado" [(ngModel)]="producto.estado" required>
+            <input type="text" class="form-control" id="estado" name="estado" [(ngModel)]="estado" required>
             <label for="estado">Estado</label>
           </div>
           <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="visibilidad" name="visibilidad" [(ngModel)]="producto.visibilidad"
+            <input type="text" class="form-control" id="visibilidad" name="visibilidad" [(ngModel)]="visibilidad"
               required>
             <label for="visibilidad">Visibilidad</label>
           </div>
           <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="producto.cantidad" required>
+            <input type="text" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="cantidad" required>
             <label for="cantidad">Cantidad</label>
           </div>
           <div class="custom-file space-input-oak">
@@ -52,7 +52,7 @@
           </div>
           <div class="form-group d-flex justify-content-between my-3">
             <button type="submit" class="w-30 btn btn-lg btn-primary-oak space-input-oak btn-block" [disabled]="!f.valid || !imagen">
-              Editar producto</button>
+              Crear producto</button>
             <button class="w-30 btn btn-lg btn-secundary-oak space-input-oak btn-block" routerLink="/productos-admin">
                Volver</button>
           </div>

@@ -17,7 +17,7 @@ public class ProductoService {
     ProductoRepository productoRepository;
 
     public List<Producto> list(){
-        return productoRepository.findAll();
+        return productoRepository.findByOrderByIdProducto();
     }
 
     public Optional<Producto> getOne(int id){
@@ -43,4 +43,5 @@ public class ProductoService {
     public boolean existsByNombre(String nombre){
         return productoRepository.existsByNombre(nombre);
     }
+
 }

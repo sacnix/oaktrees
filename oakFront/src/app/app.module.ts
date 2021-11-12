@@ -8,14 +8,6 @@ import { DetalleRolComponent } from './rol/detalle-rol.component';
 import { NuevoRolComponent } from './rol/nuevo-rol.component';
 import { EditarRolComponent } from './rol/editar-rol.component';
 import { interceporProvider } from './interceptors/prod-interceptor.service';
-
-//para consumar API y el formulario
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-
-//externos
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
 import { ListaPrincipalComponent } from './principal/lista-principal/lista-principal.component';
 import { ListarComponent } from './catalogo/listar/listar.component';
 import { CambiarClaveComponent } from './persona/cambiar-clave/cambiar-clave.component';
@@ -38,7 +30,18 @@ import { EditarPedidoAdminComponent } from './pedido/editar-pedido-admin/editar-
 import { EditarPedidoComponent } from './pedido/editar-pedido/editar-pedido.component';
 import { ListarPedidosComponent } from './pedido/listar-pedidos/listar-pedidos.component';
 import { MenuComponent } from './menu/menu.component';
+import { NuevoProductoComponent } from './producto/nuevo-producto/nuevo-producto.component';
 
+//para consumar API y el formulario
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+
+//externos
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ProductosAdminComponent } from './producto/productos-admin/productos-admin.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +71,9 @@ import { MenuComponent } from './menu/menu.component';
     EditarPedidoAdminComponent,
     EditarPedidoComponent,
     ListarPedidosComponent,
-    MenuComponent
+    MenuComponent,
+    NuevoProductoComponent,
+    ProductosAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +81,9 @@ import { MenuComponent } from './menu/menu.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [interceporProvider],
   bootstrap: [AppComponent]

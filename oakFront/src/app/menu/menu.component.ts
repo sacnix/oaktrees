@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Rol } from '../models/rol';
 import { PersonaService } from '../service/persona.service';
 import { RolService } from '../service/rol.service';
@@ -22,6 +23,7 @@ export class MenuComponent implements OnInit {
   constructor(
     private tokenService: TokenService,
     private rolService: RolService,
+    private router: Router,
     private personaService: PersonaService) { }
 
   ngOnInit() {
@@ -71,6 +73,7 @@ export class MenuComponent implements OnInit {
   onLogOut(): void {
     this.tokenService.logOut();
     window.location.reload();
+    this.router.navigate(['/']);
   }
 
 }

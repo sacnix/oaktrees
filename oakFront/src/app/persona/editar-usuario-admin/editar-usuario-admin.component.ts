@@ -19,6 +19,7 @@ export class EditarUsuarioAdminComponent implements OnInit {
   roles: string[] = [];
   mensajeError= '';
   persona: any = null;
+  rol: '';
 
   constructor(
     private tokenService: TokenService,
@@ -45,8 +46,10 @@ export class EditarUsuarioAdminComponent implements OnInit {
 
   onUpdate(): void{
     const correo = this.activatedRoute.snapshot.params.correo;
-    this.persona = new Persona(this.persona.nombre, this.persona.telefono, this.persona.correo, this.persona.clave);
-    this.personaService.cambiarClave(correo, this.persona).subscribe(
+    console.log("this " + this.rol);
+    this.persona = new Persona(this.persona.nombre, this.persona.telefono, this.persona.correo, this.persona.clave, this.rol);
+    this.personaService.actualizar(correo, this.persona).subscribe(
+      
       data => {
         this.toastr.success('La cuenta ha sido actualizada', 'OK', {
           timeOut: 3000, positionClass: 'toast-top-center'
@@ -62,5 +65,9 @@ export class EditarUsuarioAdminComponent implements OnInit {
 
       }
     );
+  }
+
+  selectChangeHandler (event: any) {
+    this.rol = event.target.value;
   }
 }

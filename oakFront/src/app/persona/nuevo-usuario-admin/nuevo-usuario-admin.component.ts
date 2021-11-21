@@ -21,6 +21,7 @@ export class NuevoUsuarioAdminComponent implements OnInit {
   clave = '';
   mensajeError= '';
   isLogged = false;
+  rol = '';
 
   constructor(
     private tokenService: TokenService,
@@ -36,7 +37,7 @@ export class NuevoUsuarioAdminComponent implements OnInit {
   }
 
   onRegister(): void{
-    this.nuevoUsuario = new NuevaPersona(this.nombre, this.telefono, this.correo, this.clave);
+    this.nuevoUsuario = new NuevaPersona(this.nombre, this.telefono, this.correo, this.clave, this.rol);
     this.authService.nuevo(this.nuevoUsuario).subscribe(
       data =>{
         this.isRegister = true;
@@ -57,6 +58,11 @@ export class NuevoUsuarioAdminComponent implements OnInit {
       }
     );
 
+  }
+
+  
+  selectChangeHandler (event: any) {
+    this.rol = event.target.value;
   }
 
 

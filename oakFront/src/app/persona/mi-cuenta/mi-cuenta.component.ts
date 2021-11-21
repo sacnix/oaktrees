@@ -48,7 +48,7 @@ export class MiCuentaComponent implements OnInit {
 
   onUpdate(): void{
     const correo = this.activatedRoute.snapshot.params.correo;
-    this.personaService.cambiarClave(correo, this.persona).subscribe(
+    this.personaService.actualizar(correo, this.persona).subscribe(
       data => {
         this.toastr.success('Se han actualizado los datos de la cuenta', 'OK', {
           timeOut: 3000, positionClass: 'toast-top-center'

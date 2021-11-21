@@ -24,11 +24,11 @@
     </fieldset>
     <div class="mb-3">
       <label for="disabledTextInput" class="form-label">Rol</label>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Selecciona una opción</option>
-        <option value="1">Usuario</option>
-        <option value="2">Administrador</option>
-        <option value="3">Vendedor</option>
+      <select class="form-select" aria-label="Default select example" [(ngModel)]="persona.rol" (change)="selectChangeHandler($event)">
+        <option selected>Seleccione una opción</option>
+        <option [value]="1">Administrador</option>
+        <option [value]="2">Usuario</option>
+        <option [value]="3">Vendedor</option>
       </select>
     </div>
 

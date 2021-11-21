@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
-public class NuevaPersona {
+public class PersonaEditada {
 
     @NotBlank
     private String clave;
@@ -16,7 +16,7 @@ public class NuevaPersona {
     private String nombre;
     @NotBlank
     private String telefono;
-
+    @NotBlank
     private String rol;
 
     public String getNombre() {

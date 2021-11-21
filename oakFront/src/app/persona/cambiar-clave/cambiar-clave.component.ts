@@ -46,7 +46,7 @@ export class CambiarClaveComponent implements OnInit {
 
   onUpdate(): void{
     const correo = this.activatedRoute.snapshot.params.correo;
-    this.persona = new Persona(this.persona.nombre, this.persona.telefono, this.persona.correo, this.clave);
+    this.persona = new Persona(this.persona.nombre, this.persona.telefono, this.persona.correo, this.clave, this.persona.rol);
     this.personaService.cambiarClave(correo, this.persona).subscribe(
       data => {
         this.toastr.success('Contraseña actualizada', 'OK', {

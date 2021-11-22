@@ -43,7 +43,6 @@ public class CategoriaController {
         return new ResponseEntity<>(categoria, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('VENDEDOR')")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CategoriaDTO categoriaDTO){
         if(StringUtils.isBlank(categoriaDTO.getNombre()))
@@ -55,7 +54,6 @@ public class CategoriaController {
         return new ResponseEntity<>(new Mensaje("Categoría creada correctamente"), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('VENDEDOR')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody CategoriaDTO categoriaDTO){
         if(!categoriaService.existsById(id))
@@ -70,7 +68,6 @@ public class CategoriaController {
         return new ResponseEntity<>(new Mensaje("Categoría actualizada correctamente"), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN') " + "|| hasRole('VENDEDOR')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id")int id){
         if(!categoriaService.existsById(id))

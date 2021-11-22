@@ -9,9 +9,10 @@ export class Producto {
     estado: number;
     visibilidad: number;
     cantidad: number;
+    categoria: string;
 
      constructor(nombre: string, descripcion: string, precio: number, color: string, imagenUrl: string, imagenId: string, estado: number,
-        visibilidad: number, cantidad: number) {
+        visibilidad: number, cantidad: number, categoria: string) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -21,5 +22,6 @@ export class Producto {
         this.estado = estado;
         this.visibilidad = visibilidad;
         this.cantidad = cantidad;
+        this.categoria = categoria;
     }
 }

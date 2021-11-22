@@ -34,6 +34,7 @@ export class ProductoService {
     formData.append('estado', producto.estado.toString());
     formData.append('visibilidad', producto.visibilidad.toString());
     formData.append('cantidad', producto.cantidad.toString());
+    formData.append('categoria', producto.categoria);
     return this.httpClient.post<any>(this.productoURL + 'create', formData);
   }
 
@@ -47,6 +48,7 @@ export class ProductoService {
     formData.append('estado', producto.estado.toString());
     formData.append('visibilidad', producto.visibilidad.toString());
     formData.append('cantidad', producto.cantidad.toString());
+    formData.append('categoria', producto.categoria.toString());
     return this.httpClient.put<any>(this.productoURL + `update/${idProducto}`, formData);
   }
 

@@ -1,65 +1,74 @@
 <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
-  <p style="font-size: 20px; color: white">Subiendo imagen...</p>
+    <p style="font-size: 20px; color: white">Subiendo imagen...</p>
 </ngx-spinner>
 <app-menu></app-menu>
 
 <main>
-  <div class="container">
-    <div class="row mt-2">
-      <div class="col-md-4 mx-auto">
-        <form (ngSubmit)="onUpdate()" novalidate enctype="multipart/form-data" #f="ngForm" *ngIf="producto">
-          <h1 class="h3 mb-3 fw-normal text-center">Crear producto</h1>
-          <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="producto.nombre" required>
-            <label for="nombre">Nombres</label>
-          </div>
-          <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="producto.descripcion"
-              required>
-            <label for="telefono">Descripción</label>
-          </div>
-          <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="precio" name="precio" [(ngModel)]="producto.precio" required>
-            <label for="precio">Precio</label>
-          </div>
-          <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="color" name="color" [(ngModel)]="producto.color" required>
-            <label for="color">Color</label>
-          </div>
-          <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="estado" name="estado" [(ngModel)]="producto.estado" required>
-            <label for="estado">Estado</label>
-          </div>
-          <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="visibilidad" name="visibilidad" [(ngModel)]="producto.visibilidad"
-              required>
-            <label for="visibilidad">Visibilidad</label>
-          </div>
-          <div class="form-floating space-input-oak">
-            <input type="text" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="producto.cantidad" required>
-            <label for="cantidad">Cantidad</label>
-          </div>
-          <div class="custom-file space-input-oak">
-            <input type="file" class="custom-file-input" id="imagen" #imagenInputFile (change)="onFileChange($event)"
-              accept="image/png, image/jpeg, image/gif">
-            <label class="custom-file-label" for="imagen">Elige una imagen</label>
-          </div>
-          <div *ngIf="imagen" class="mt-2">
-            <h5>Vista Previa:</h5>
-            <div>
-              <img class="image-thumbnail" style="max-width: 200px" [src]="imagenMin">
-            </div>
-          </div>
-          <div class="form-group d-flex justify-content-between my-3">
-            <button type="submit" class="w-30 btn btn-lg btn-primary-oak space-input-oak btn-block" [disabled]="!f.valid || !imagen">
+    <div class="container">
+        <div class="row mt-2">
+            <div class="col-md-4 mx-auto">
+                <form (ngSubmit)="onUpdate()" novalidate enctype="multipart/form-data" #f="ngForm" *ngIf="producto">
+                    <h1 class="h3 mb-3 fw-normal text-center">Crear producto</h1>
+                    <div class="form-floating space-input-oak">
+                        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="producto.nombre" required>
+                        <label for="nombre">Nombres</label>
+                    </div>
+                    <div class="form-floating space-input-oak">
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="producto.descripcion" required>
+                        <label for="telefono">Descripción</label>
+                    </div>
+                    <div class="form-floating space-input-oak">
+                        <input type="text" class="form-control" id="precio" name="precio" [(ngModel)]="producto.precio" required (keypress)="keyPressNumbers($event)">
+                        <label for="precio">Precio</label>
+                    </div>
+                    <div class="form-floating space-input-oak">
+                        <input type="text" class="form-control" id="color" name="color" [(ngModel)]="producto.color" required (keypress)="keyPressAlpha($event)">
+                        <label for="color">Color</label>
+                    </div>
+                    <div class="form-floating space-input-oak">
+                        <input type="text" class="form-control" id="estado" name="estado" [(ngModel)]="producto.estado" required (keypress)="keyPressNumbers($event)">
+                        <label for="estado">Estado (1 activo, 0 inactivo)</label>
+                    </div>
+                    <div class="form-floating space-input-oak">
+                        <input type="text" class="form-control" id="visibilidad" name="visibilidad" [(ngModel)]="producto.visibilidad" required (keypress)="keyPressNumbers($event)">
+                        <label for="visibilidad">Visibilidad (1 visible, 0 invisible)</label>
+                    </div>
+                    <div class="form-floating space-input-oak">
+                        <input type="text" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="producto.cantidad" required (keypress)="keyPressNumbers($event)">
+                        <label for="cantidad">Cantidad</label>
+                    </div>
+                    <div class="mb-3 space-input-oak">
+                        <label for="disabledTextInput" class="form-label">Categoría</label>
+                        <select class="form-select" (change)="selectChangeHandler($event)" required>
+                    <option [value]="">Selecciona una categoría</option>
+                    <option [value]="categorias.nombre" *ngFor="let categorias of categorias">{{categorias.nombre}}</option>
+          </select>
+                    </div>
+                    <div class="custom-file space-input-oak">
+                        <input type="file" class="custom-file-input" id="imagen" #imagenInputFile (change)="onFileChange($event)" accept="image/png, image/jpeg, image/gif">
+                        <label class="custom-file-label" for="imagen">Elige una imagen</label>
+                    </div>
+                    <div *ngIf="!imagen" class="mt-2">
+                        <div>
+                            <img class="image-thumbnail" style="max-width: 300px; display: block;" src="{{producto.imagenUrl}}" alt="">
+                        </div>
+                    </div>
+                    <div *ngIf="imagen" class="mt-2">
+                        <h5>Vista Previa:</h5>
+                        <div>
+                            <img class="image-thumbnail" style="max-width: 200px" [src]="imagenMin">
+                        </div>
+                    </div>
+                    <div class="form-group d-flex justify-content-between my-3">
+                        <button type="submit" class="w-30 btn btn-lg btn-primary-oak space-input-oak btn-block" [disabled]="!f.valid || !categoriaSeleccionada">
               Editar producto</button>
-            <button class="w-30 btn btn-lg btn-secundary-oak space-input-oak btn-block" routerLink="/productos-admin">
+                        <button class="w-30 btn btn-lg btn-secundary-oak space-input-oak btn-block" routerLink="/productos-admin">
                Volver</button>
-          </div>
-        </form>
-      </div>
-    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-  </div>
+    </div>
 
 </main>

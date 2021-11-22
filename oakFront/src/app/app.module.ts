@@ -42,6 +42,8 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProductosAdminComponent } from './producto/productos-admin/productos-admin.component';
+import { VerProductoComponent } from './catalogo/ver-producto/ver-producto.component';
+import { VerCarritoComponent } from './carrito/ver-carrito/ver-carrito.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import { ProductosAdminComponent } from './producto/productos-admin/productos-ad
     ListarPedidosComponent,
     MenuComponent,
     NuevoProductoComponent,
-    ProductosAdminComponent
+    ProductosAdminComponent,
+    VerProductoComponent,
+    VerCarritoComponent
   ],
   imports: [
     BrowserModule,

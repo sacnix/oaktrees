@@ -1,0 +1,44 @@
+<app-menu></app-menu>
+
+<main>
+    <div class="container">
+        <h1 class="p-3 h3 mb-3 text-start">Detalle producto</h1>
+        <div class="clearfix">
+            <img src="{{producto.imagenUrl}}" style="max-width: 600px; display: block;" class="img-product col-md-6 float-md-start mb-3 ms-md-3" alt="">
+            <div class="info-product-oak">
+                <form *ngIf="producto" #f="ngForm">
+                    <h1 class="p-3 h5 mb-3 text-start">{{producto.nombre}}</h1>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label"><b>Precio</b></label>
+                        <div class="col-sm-10">
+                            <label class="col-sm-2 col-form-label">{{producto.precio}}</label>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label"><b>Categoría</b></label>
+                        <div class="col-sm-10">
+                            <label class="col-sm-2 col-form-label">Categoría</label>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label"><b>Descripción</b></label>
+                        <div>
+                            <p class="col-sm-2 col-form-label">{{producto.descripcion}}</p>
+                        </div>
+                    </div>
+                    <div class="card-body d-flex justify-content-between">
+                        <button type="submit" class=" btn btn-primary-oak" *ngIf="isLogged"><i class="fas fa-plus-circle"></i> Agregar al carrito</button>
+                        <button type="submit" class=" btn btn-secundary-oak" routerLink="/catalogo"><i class="fas fa-arrow-circle-left"></i> Atrás</button>
+                    </div>
+                    <div class="mb-3 row" *ngIf="!isLogged">
+                        <label class="col-sm-2 col-form-label"><b>Importante</b></label>
+                        <div>
+                            <p>Para realizar un pedido, por favor inicia sesión <a routerLink="/login">aquí</a></p>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

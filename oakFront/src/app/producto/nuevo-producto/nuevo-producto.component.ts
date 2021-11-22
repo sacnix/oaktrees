@@ -2,8 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Categoria } from 'src/app/models/categoria';
 import { Producto } from 'src/app/models/producto';
 import { AuthService } from 'src/app/service/auth.service';
+import { CategoriaService } from 'src/app/service/categoria.service';
 import { ProductoService } from 'src/app/service/producto.service';
 import { TokenService } from 'src/app/service/token.service';
 
@@ -29,6 +31,8 @@ export class NuevoProductoComponent implements OnInit {
   cantidad: number;
   imagenUrl: string;
   imagenId: string;
+  categoria: string;
+  categorias: Categoria[] = [];
 
   constructor(
     private tokenService: TokenService,
@@ -36,13 +40,22 @@ export class NuevoProductoComponent implements OnInit {
     private productoService: ProductoService,
     private router: Router,
     private spinner: NgxSpinnerService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private categoriaService: CategoriaService
   ) { }
 
   ngOnInit() {
     if(this.tokenService.getToken()){
       this.isLogged = true;
     }
+    this.categoriaService.listarCategorias().subscribe(
+      data => {
+        this.categorias = data;
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   onFileChange(event: any) {
@@ -57,7 +70,7 @@ export class NuevoProductoComponent implements OnInit {
   onUpload(): void {
     this.spinner.show();
     this.producto = new Producto(this.nombre, this.descripcion, this.precio, this.color, this.imagenUrl, this.imagenId, this.estado,
-      this.visibilidad, this.cantidad);
+      this.visibilidad, this.cantidad, this.categoria);
     this.productoService.save(this.imagen,this.producto).subscribe(
       data => {
         this.spinner.hide();
@@ -78,6 +91,45 @@ export class NuevoProductoComponent implements OnInit {
 
   reset(): void {
     this.imagenFile.nativeElement.value = '';
+  }
+
+  selectChangeHandler (event: any) {
+    this.categoria = event.target.value;
+  }
+
+  keyPressNumbers(event: any) {
+    var charCode = (event.which) ? event.which : event.keyCode;
+    // Only Numbers 0-9
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  keyPressAlphaNumeric(event: any) {
+
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/[a-zA-Z0-9]/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
+  }
+
+  keyPressAlpha(event: any) {
+
+    var inp = String.fromCharCode(event.keyCode);
+
+    if (/[a-zA-Z]/.test(inp)) {
+      return true;
+    } else {
+      event.preventDefault();
+      return false;
+    }
   }
 
 }

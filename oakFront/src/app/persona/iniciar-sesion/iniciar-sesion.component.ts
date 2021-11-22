@@ -3,6 +3,9 @@ import {TokenService} from "../../service/token.service";
 import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
 import {LoginUsuario} from "../../models/login-usuario";
+import { Carrito } from 'src/app/models/carrito';
+import { CarritoService } from 'src/app/service/carrito.service';
+import { Producto } from 'src/app/models/producto';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -18,11 +21,14 @@ export class IniciarSesionComponent implements OnInit {
   clave = '';
   roles: string[] = [];
   mensajeError= '';
+  carrito: Carrito;
+  producto: Producto[] = [];
 
   constructor(
     private tokenService: TokenService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private carritoService: CarritoService
   ) { }
 
   ngOnInit() {
@@ -45,6 +51,7 @@ export class IniciarSesionComponent implements OnInit {
         this.tokenService.setAuthorities(data.authorities);
         this.roles = data.authorities;
         this.router.navigate(['/']);
+        this.cargarCarrito();
       },
       err =>{
         this.isLogged = false;
@@ -54,5 +61,29 @@ export class IniciarSesionComponent implements OnInit {
     );
 
   }
+
+  cargarCarrito(): void {
+    this.carritoService.detail(this.correo).subscribe(
+      data => {
+        this.carrito = data;
+      },
+      err => {
+        this.crearCarrito();
+      }
+    )
+  }
+
+  crearCarrito(): void {
+    this.carrito = new Carrito(0, 0, this.correo, this.producto);
+    this.carritoService.crear(this.carrito).subscribe(
+      data => {
+        this.carrito = data;
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
 
 }

@@ -11,11 +11,11 @@ public class ProductoDTO {
     private int estado;
     private int visibilidad;
     private int cantidad;
-    private String idCategoria;
+    private String categoria;
     private String idCarrito;
 
     public ProductoDTO(String nombre, String descripcion, float precio, String color, String imagenUrl,
-                    String imagenId, int estado, int visibilidad, int cantidad, String idCategoria, String idCarrito) {
+                    String imagenId, int estado, int visibilidad, int cantidad, String categoria, String idCarrito) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -25,7 +25,7 @@ public class ProductoDTO {
         this.estado = estado;
         this.visibilidad = visibilidad;
         this.cantidad = cantidad;
-        this.idCategoria = idCategoria;
+        this.categoria = categoria;
         this.idCarrito = idCarrito;
     }
 
@@ -105,12 +105,12 @@ public class ProductoDTO {
         this.cantidad = cantidad;
     }
 
-    public String getIdCategoria() {
-        return idCategoria;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setIdCategoria(String idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getIdCarrito() {

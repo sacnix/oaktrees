@@ -18,8 +18,11 @@ import { NuevoProductoComponent } from './producto/nuevo-producto/nuevo-producto
 import { ProductosAdminComponent } from './producto/productos-admin/productos-admin.component';
 import { EditarProductoComponent } from './producto/editar-producto/editar-producto.component';
 import { HistoricoPedidoComponent } from './pedido/historico-pedidos/historico-pedido.component';
-import { ListarPedidosComponent } from './pedido/listar-pedidos/listar-pedidos.component';
 import { CategoriasAdminComponent } from './categoria/categorias-admin/categorias-admin.component';
+import { VerProductoComponent } from './catalogo/ver-producto/ver-producto.component';
+import { NuevaCategoriaComponent } from './categoria/nueva-categoria/nueva-categoria.component';
+import { EditarCategoriaAdminComponent } from './categoria/editar-categoria-admin/editar-categoria-admin.component';
+import { VerCarritoComponent } from './carrito/ver-carrito/ver-carrito.component';
 
 const routes: Routes = [
   { path: '', component: ListaPrincipalComponent },
@@ -38,8 +41,12 @@ const routes: Routes = [
   { path: 'rol/nuevo', component: NuevoRolComponent, canActivate: [guard], data: { expectedRol: ['admin', 'vendedor'] } },
   { path: 'rol/editar/:id', component: EditarRolComponent, canActivate: [guard], data: { expectedRol: ['admin', 'vendedor'] } },
   { path: 'catalogo', component: ListarComponent },
+  { path: 'ver-producto/:idProducto', component: VerProductoComponent },
   { path: 'historico-pedidos', component: HistoricoPedidoComponent, canActivate: [guard], data: { expectedRol: ['user'] }  },
   { path: 'categorias', component: CategoriasAdminComponent, canActivate: [guard], data: { expectedRol: ['admin', 'vendedor'] }  },
+  { path: 'categorias/nueva-categoria', component: NuevaCategoriaComponent, canActivate: [guard], data: { expectedRol: ['admin'] }  },
+  { path: 'categorias/editar-categoria/:id', component: EditarCategoriaAdminComponent, canActivate: [guard], data: { expectedRol: ['admin'] }  },
+  { path: 'carrito/:id', component: VerCarritoComponent, canActivate: [guard], data: { expectedRol: ['vendedor', 'user'] } },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 

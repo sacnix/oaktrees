@@ -1,15 +1,12 @@
 package co.com.oaktrees.controller;
 
 import co.com.oaktrees.dto.Mensaje;
-import co.com.oaktrees.dto.ProductoDTO;
 import co.com.oaktrees.entity.Producto;
 import co.com.oaktrees.service.CloudinaryService;
 import co.com.oaktrees.service.ProductoService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,7 +40,8 @@ public class ProductoController {
                                     @RequestPart("precio") String precio, @RequestPart("color") String color,
                                     @RequestPart("estado") String estado,
                                     @RequestPart("visibilidad") String visibilidad,
-                                    @RequestPart("cantidad") String cantidad
+                                    @RequestPart("cantidad") String cantidad,
+                                    @RequestPart("categoria") String categoria
                                     )throws IOException {
         BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
         if(bi == null){
@@ -54,7 +52,7 @@ public class ProductoController {
                 new Producto(nombre, descripcion, Float.parseFloat(precio),
                         color, (String)result.get("url"), (String)result.get("public_id"), Integer.parseInt(estado),
                         Integer.parseInt(visibilidad),
-                        Integer.parseInt(cantidad));
+                        Integer.parseInt(cantidad), categoria);
         productoService.save(imagen);
         return new ResponseEntity(new Mensaje("El producto ha sido creado correctamente"), HttpStatus.OK);
     }
@@ -77,17 +75,27 @@ public class ProductoController {
                                             @RequestPart("precio") String precio, @RequestPart("color") String color,
                                             @RequestPart("estado") String estado,
                                             @RequestPart("visibilidad") String visibilidad,
-                                            @RequestPart("cantidad") String cantidad
+                                            @RequestPart("cantidad") String cantidad,
+                                            @RequestPart("categoria") String categoria
     ) throws IOException {
         if (!productoService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
-        BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
-        if(bi == null){
-            return new ResponseEntity(new Mensaje("La imagen no es válida"), HttpStatus.BAD_REQUEST);
-        }
-        Map result = cloudinaryService.upload(multipartFile);
         Producto producto = productoService.getOne(id).get();
-        Map resultDelete = cloudinaryService.delete(producto.getImagenId());
+        String imagenUrlResult;
+        String imagenIdResult;
+        if(multipartFile.getResource().getFilename().equals(producto.getImagenId())){
+            imagenUrlResult = producto.getImagenUrl();
+            imagenIdResult = producto.getImagenId();
+        }else{
+            BufferedImage bi = ImageIO.read(multipartFile.getInputStream());
+            if(bi == null){
+                return new ResponseEntity(new Mensaje("La imagen no es válida"), HttpStatus.BAD_REQUEST);
+            }
+            Map result = cloudinaryService.upload(multipartFile);
+            cloudinaryService.delete(producto.getImagenId());
+            imagenUrlResult = (String)result.get("url");
+            imagenIdResult = (String)result.get("public_id");
+        }
         producto.setNombre(nombre);
         producto.setDescripcion(descripcion);
         producto.setPrecio(Float.parseFloat(precio));
@@ -95,8 +103,9 @@ public class ProductoController {
         producto.setEstado(Integer.parseInt(estado));
         producto.setVisibilidad(Integer.parseInt(visibilidad));
         producto.setCantidad(Integer.parseInt(cantidad));
-        producto.setImagenUrl((String)result.get("url"));
-        producto.setImagenId((String)result.get("public_id"));
+        producto.setImagenUrl(imagenUrlResult);
+        producto.setImagenId(imagenIdResult);
+        producto.setCategoria(categoria);
         productoService.save(producto);
         return new ResponseEntity<>(producto, HttpStatus.OK);
     }

@@ -2,7 +2,9 @@ package co.com.oaktrees.controller;
 
 import co.com.oaktrees.dto.CarritoDTO;
 import co.com.oaktrees.dto.Mensaje;
+import co.com.oaktrees.dto.ProductoDTO;
 import co.com.oaktrees.entity.Carrito;
+import co.com.oaktrees.entity.Producto;
 import co.com.oaktrees.service.CarritoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -35,11 +38,11 @@ public class CarritoController {
         return new ResponseEntity<>(carrito, HttpStatus.OK);
     }
 
-    @GetMapping("/detailname/{idUsuario}")
-    public ResponseEntity<Carrito> getByIdUsuario(@PathVariable("idUsuario") String idUsuario){
-        if(!carritoService.existsByIdUsuario(idUsuario))
+    @GetMapping("/detailname/{correo}")
+    public ResponseEntity<Carrito> getByIdUsuario(@PathVariable("correo") String correo){
+        if(!carritoService.existsByIdUsuario(correo))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
-        Carrito carrito = carritoService.getByIdUsuario(idUsuario).get();
+        Carrito carrito = carritoService.getByIdUsuario(correo).get();
         return new ResponseEntity<>(carrito, HttpStatus.OK);
     }
 
@@ -54,7 +57,7 @@ public class CarritoController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody CarritoDTO carritoDTO){
-        if(!carritoService.existsById(id))
+            if(!carritoService.existsById(id))
             return new ResponseEntity(new Mensaje("El carrito no existe"), HttpStatus.NOT_FOUND);
         if(carritoService.existsByIdUsuario(carritoDTO.getIdUsuario()) && carritoService.getByIdUsuario(carritoDTO.getIdUsuario()).get().getIdCarrito() != id)
             return new ResponseEntity<>(new Mensaje("Ese usuario ya posee un carrito"),
@@ -64,7 +67,9 @@ public class CarritoController {
         Carrito carrito = carritoService.getOne(id).get();
         carrito.setSubTotal(carritoDTO.getSubTotal());
         carrito.setTotal(carritoDTO.getTotal());
+        carrito.setTotal(carritoDTO.getTotal());
         carrito.setIdUsuario(carritoDTO.getIdUsuario());
+        carrito.setProductos(carritoDTO.getProductos());
         carritoService.save(carrito);
         return new ResponseEntity<>(new Mensaje("El carrito ha sido actualizado correctamente"), HttpStatus.OK);
     }

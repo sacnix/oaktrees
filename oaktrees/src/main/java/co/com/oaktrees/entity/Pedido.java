@@ -1,10 +1,9 @@
 package co.com.oaktrees.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Pedido {
@@ -17,15 +16,17 @@ public class Pedido {
     private int idTipoEntrega;
     private int idEstado;
     private String idUsuario;
-    private String idCarrito;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "carrito_pedido", joinColumns = @JoinColumn(name = "pedido_id"),
+            inverseJoinColumns = @JoinColumn(name = "carrito_id"))
+    private List<Producto> productos = new ArrayList<>();
 
-    public Pedido(Date fecha, float valorTotal, int idTipoEntrega, int idEstado, String idUsuario, String idCarrito) {
+    public Pedido(Date fecha, float valorTotal, int idTipoEntrega, int idEstado, String idUsuario) {
         this.fecha = fecha;
         this.valorTotal = valorTotal;
         this.idTipoEntrega = idTipoEntrega;
         this.idEstado = idEstado;
         this.idUsuario = idUsuario;
-        this.idCarrito = idCarrito;
     }
 
     public Pedido() {
@@ -79,11 +80,11 @@ public class Pedido {
         this.idUsuario = idUsuario;
     }
 
-    public String getIdCarrito() {
-        return idCarrito;
+    public List<Producto> getProductos() {
+        return productos;
     }
 
-    public void setIdCarrito(String idCarrito) {
-        this.idCarrito = idCarrito;
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }

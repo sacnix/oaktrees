@@ -48,7 +48,7 @@ public class PedidoController {
         if (StringUtils.isBlank(pedidoDTO.getIdUsuario()))
             return new ResponseEntity<>(new Mensaje("El ID del usuario es obligatorio"), HttpStatus.BAD_REQUEST);
         Pedido pedido = new Pedido(pedidoDTO.getFecha(), pedidoDTO.getValorTotal(), pedidoDTO.getIdTipoEntrega(),
-                pedidoDTO.getIdEstado(), pedidoDTO.getIdUsuario(), pedidoDTO.getIdCarrito());
+                pedidoDTO.getIdEstado(), pedidoDTO.getIdUsuario());
         pedidoService.save(pedido);
         return new ResponseEntity<>(new Mensaje("El pedido ha sido creado correctamente"), HttpStatus.OK);
     }
@@ -68,7 +68,6 @@ public class PedidoController {
         pedido.setIdTipoEntrega(pedidoDTO.getIdTipoEntrega());
         pedido.setIdEstado(pedidoDTO.getIdEstado());
         pedido.setIdUsuario(pedidoDTO.getIdUsuario());
-        pedido.setIdCarrito(pedidoDTO.getIdCarrito());
         pedidoService.save(pedido);
         return new ResponseEntity<>(new Mensaje("El pedido ha sido actualizado correctamente"), HttpStatus.OK);
     }

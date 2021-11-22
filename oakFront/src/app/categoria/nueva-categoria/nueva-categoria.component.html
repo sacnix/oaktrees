@@ -1,27 +1,19 @@
-<div id="encabezado"></div>
-
+<app-menu></app-menu>
 <main class="form-signin">
-  <form action="frm_categoriasAdmin.html">
-    <h1 class="h3 mb-3 fw-normal">Categorías</h1>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Código</label>
-      <input type="text"  value="12345" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Descripción
-      </label>
-      <textarea  type="text" placeholder="Productos de belleza y maquillaje de las marcas Avon, Sammy, Trendy." class="form-control" aria-describedby="emailHelp"></textarea>
-    </div>
+    <form (ngSubmit)="onUpload()">
+        <h1 class="h3 mb-3 fw-normal">Categorías</h1>
+        <div class="form-floating space-input-oak">
+            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="nombre" required>
+            <label for="nombre">Nombre</label>
+        </div>
 
-    <div class="row">
-      <div class="col text-center">
-        <button type="submit" class="btn btn-secundary-oak">Cancelar</button>
-      </div>
-      <div class="col text-center">
-        <button type="submit" class="btn btn-primary-oak">Actualizar</button>
-      </div>
-    </div>
-  </form>
+        <div class="row space-input-oak ">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-secundary-oak">Cancelar</button>
+            </div>
+            <div class="col text-center">
+                <button type="submit" class="btn btn-primary-oak">Crear</button>
+            </div>
+        </div>
+    </form>
 </main>
-<hr class="featurette-divider">
-<div id="pie"></div>

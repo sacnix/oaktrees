@@ -1,10 +1,16 @@
 package co.com.oaktrees.dto;
 
+import co.com.oaktrees.entity.Producto;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class CarritoDTO {
 
     private float subTotal;
     private float total;
     private String idUsuario;
+    private List<Producto> productos = new ArrayList<>();
 
     public CarritoDTO(float subTotal, float total, String idUsuario) {
         this.subTotal = subTotal;
@@ -39,4 +45,11 @@ public class CarritoDTO {
         this.idUsuario = idUsuario;
     }
 
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
 }

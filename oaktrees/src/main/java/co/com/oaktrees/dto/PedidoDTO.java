@@ -1,23 +1,31 @@
 package co.com.oaktrees.dto;
 
+import co.com.oaktrees.entity.Producto;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class PedidoDTO {
 
     private Date fecha;
     private float valorTotal;
-    private int idTipoEntrega;
+    private String tipoEntrega;
+    private String telefono;
+    private String direccion;
     private int idEstado;
     private String idUsuario;
-    private String idCarrito;
+    private List<Producto> productos = new ArrayList<>();
 
-    public PedidoDTO(Date fecha, float valorTotal, int idTipoEntrega, int idEstado, String idUsuario, String idCarrito) {
+    public PedidoDTO(Date fecha, float valorTotal, String tipoEntrega, String telefono, String direccion, int idEstado,
+                  String idUsuario) {
         this.fecha = fecha;
         this.valorTotal = valorTotal;
-        this.idTipoEntrega = idTipoEntrega;
+        this.tipoEntrega = tipoEntrega;
+        this.telefono = telefono;
+        this.direccion = direccion;
         this.idEstado = idEstado;
         this.idUsuario = idUsuario;
-        this.idCarrito = idCarrito;
     }
 
     public PedidoDTO() {
@@ -39,12 +47,28 @@ public class PedidoDTO {
         this.valorTotal = valorTotal;
     }
 
-    public int getIdTipoEntrega() {
-        return idTipoEntrega;
+    public String getTipoEntrega() {
+        return tipoEntrega;
     }
 
-    public void setIdTipoEntrega(int idTipoEntrega) {
-        this.idTipoEntrega = idTipoEntrega;
+    public void setTipoEntrega(String tipoEntrega) {
+        this.tipoEntrega = tipoEntrega;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public int getIdEstado() {
@@ -63,11 +87,12 @@ public class PedidoDTO {
         this.idUsuario = idUsuario;
     }
 
-    public String getIdCarrito() {
-        return idCarrito;
+    public List<Producto> getProductos() {
+        return productos;
     }
 
-    public void setIdCarrito(String idCarrito) {
-        this.idCarrito = idCarrito;
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
+
 }

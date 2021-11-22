@@ -13,18 +13,23 @@ public class Pedido {
     private int idPedido;
     private Date fecha;
     private float valorTotal;
-    private int idTipoEntrega;
+    private String tipoEntrega;
+    private String telefono;
+    private String direccion;
     private int idEstado;
     private String idUsuario;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "carrito_pedido", joinColumns = @JoinColumn(name = "pedido_id"),
-            inverseJoinColumns = @JoinColumn(name = "carrito_id"))
+    @JoinTable(name = "producto_pedido", joinColumns = @JoinColumn(name = "pedido_id"),
+            inverseJoinColumns = @JoinColumn(name = "producto_id"))
     private List<Producto> productos = new ArrayList<>();
 
-    public Pedido(Date fecha, float valorTotal, int idTipoEntrega, int idEstado, String idUsuario) {
+    public Pedido(Date fecha, float valorTotal, String tipoEntrega, String telefono, String direccion, int idEstado,
+                  String idUsuario) {
         this.fecha = fecha;
         this.valorTotal = valorTotal;
-        this.idTipoEntrega = idTipoEntrega;
+        this.tipoEntrega = tipoEntrega;
+        this.telefono = telefono;
+        this.direccion = direccion;
         this.idEstado = idEstado;
         this.idUsuario = idUsuario;
     }
@@ -56,12 +61,28 @@ public class Pedido {
         this.valorTotal = valorTotal;
     }
 
-    public int getIdTipoEntrega() {
-        return idTipoEntrega;
+    public String getTipoEntrega() {
+        return tipoEntrega;
     }
 
-    public void setIdTipoEntrega(int idTipoEntrega) {
-        this.idTipoEntrega = idTipoEntrega;
+    public void setTipoEntrega(String tipoEntrega) {
+        this.tipoEntrega = tipoEntrega;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public int getIdEstado() {

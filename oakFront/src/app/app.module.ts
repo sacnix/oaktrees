@@ -44,6 +44,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProductosAdminComponent } from './producto/productos-admin/productos-admin.component';
 import { VerProductoComponent } from './catalogo/ver-producto/ver-producto.component';
 import { VerCarritoComponent } from './carrito/ver-carrito/ver-carrito.component';
+import { RealizarPedidoComponent } from './pedido/realizar-pedido/realizar-pedido.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { VerCarritoComponent } from './carrito/ver-carrito/ver-carrito.component
     NuevoProductoComponent,
     ProductosAdminComponent,
     VerProductoComponent,
-    VerCarritoComponent
+    VerCarritoComponent,
+    RealizarPedidoComponent
   ],
   imports: [
     BrowserModule,

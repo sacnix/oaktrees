@@ -1,0 +1,80 @@
+<app-menu></app-menu>
+<main>
+    <div class="container p-2">
+        <h1 class="h3 p-2 mb-2 fw-normal">Realizar pedido</h1>
+
+        <div class="row">
+
+            <div class="container marketing col align-self-start">
+                <div class="row">
+                    <div class="p-5 row row-cols-1 row-cols-md-3 ">
+                        <form #f="ngForm">
+                            <div class="mb-3 space-input-oak">
+                                <label for="disabledTextInput" class="form-label">Tipo de entrega</label>
+                                <select class="form-select" (change)="selectChangeHandler($event)">
+                                    <option value="" >Seleccione una opción</option>
+                            <option value="Domicilio" >Domicilio</option>
+                            <option value="Recogida en tienda" >En tienda</option>
+                          </select>
+                            </div>
+                            <div class="form-floating space-input-oak">
+                                <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="telefono" required (keypress)="keyPressNumbers($event)">
+                                <label for="telefono">Teléfono de contacto</label>
+                            </div>
+                            <div class="form-floating space-input-oak">
+                                <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="direccion" required>
+                                <label for="direccion">Dirección</label>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="p-5 row row-cols-1 row-cols-md-3 ">
+                        <h5>Descripción de artículos</h5>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Imagen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let producto of producto">
+                                    <td>{{producto.nombre}}</td>
+                                    <td>{{producto.precio}}</td>
+                                    <td><img class="image-thumbnail" style="max-width: 120px; display: block;" src="{{producto.imagenUrl}}" alt=""></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="p-3 bg-white col-4 align-self-start" style="width: 280px;">
+                <div class="card h-100">
+                    <h4 class="p-2">Resumen del pedido</h4>
+                    <div class=" col card-body">
+                        <div class="mb-3 row">
+                            <label class=" col-form-label"><b>Subtotal</b></label>
+                            <div>
+                                <p class=" col-form-label">${{carrito.subTotal}}</p>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class=" col-form-label"><b>Toal</b></label>
+                            <div>
+                                <p class=" col-form-label">${{carrito.total}}</p>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex justify-content-between">
+                            <button type="submit" class=" btn btn-primary-oak" (click)="onUpload()" [disabled]="!f.valid || !cambio"><i class="fas fa-check"></i> Confirmar pedido</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</main>

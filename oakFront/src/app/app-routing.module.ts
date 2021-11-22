@@ -23,6 +23,7 @@ import { VerProductoComponent } from './catalogo/ver-producto/ver-producto.compo
 import { NuevaCategoriaComponent } from './categoria/nueva-categoria/nueva-categoria.component';
 import { EditarCategoriaAdminComponent } from './categoria/editar-categoria-admin/editar-categoria-admin.component';
 import { VerCarritoComponent } from './carrito/ver-carrito/ver-carrito.component';
+import { RealizarPedidoComponent } from './pedido/realizar-pedido/realizar-pedido.component';
 
 const routes: Routes = [
   { path: '', component: ListaPrincipalComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'catalogo', component: ListarComponent },
   { path: 'ver-producto/:idProducto', component: VerProductoComponent },
   { path: 'historico-pedidos', component: HistoricoPedidoComponent, canActivate: [guard], data: { expectedRol: ['user'] }  },
+  { path: 'realizar-pedido/:idCarrito', component: RealizarPedidoComponent, canActivate: [guard], data: { expectedRol: ['user'] }  },
   { path: 'categorias', component: CategoriasAdminComponent, canActivate: [guard], data: { expectedRol: ['admin', 'vendedor'] }  },
   { path: 'categorias/nueva-categoria', component: NuevaCategoriaComponent, canActivate: [guard], data: { expectedRol: ['admin'] }  },
   { path: 'categorias/editar-categoria/:id', component: EditarCategoriaAdminComponent, canActivate: [guard], data: { expectedRol: ['admin'] }  },

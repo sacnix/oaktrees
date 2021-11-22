@@ -15,7 +15,7 @@
                     <a class="nav-link" routerLink="/carrito/{{persona.correo}}">Carrito</a>
                 </li>
                 <li class="nav-item" *ngIf="isLogged && !(isAdmin || isVendedor)">
-                    <a class="nav-link" routerLink="/historico-pedidos">Histórico Pedidos</a>
+                    <a class="nav-link" routerLink="/historico-pedidos/{{persona.correo}}">Histórico Pedidos</a>
                 </li>
                 <li *ngIf="isLogged && (isAdmin || isVendedor)" class="nav-item">
                     <a class="nav-link" routerLink="/pedidos">Pedidos</a>
@@ -35,6 +35,7 @@
           </a>
                     <ul class="dropdown-menu">
                         <li *ngIf="!isLogged"><a class="dropdown-item" routerLink="/login">Iniciar sesión</a></li>
+                        <li *ngIf="!isLogged"><a class="dropdown-item" routerLink="/registro">Crear cuenta</a></li>
                         <li *ngIf="isLogged"><a class="dropdown-item" routerLink="/mi-cuenta/{{persona.correo}}">Mi cuenta</a></li>
                         <li *ngIf="isLogged"><a class="dropdown-item" routerLink="/cambiar-clave/{{persona.correo}}">Cambiar
                 clave</a></li>

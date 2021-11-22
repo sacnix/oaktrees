@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -28,11 +30,17 @@ public class PedidoController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/detail/{id}")
-    public ResponseEntity<Pedido> getById(@PathVariable("id") int id) {
-        if (!pedidoService.existsById(id))
+    @GetMapping("/historico/{idUsuario}")
+    public ResponseEntity<List<Pedido>> listByCorreo(@PathVariable("idUsuario") String idUsuario) {
+        List<Pedido> list = pedidoService.listByCorreo(idUsuario);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/detail/{idPedido}")
+    public ResponseEntity<Pedido> getById(@PathVariable("idPedido") int idPedido) {
+        if (!pedidoService.existsById(idPedido))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
-        Pedido pedido = pedidoService.getOne(id).get();
+        Pedido pedido = pedidoService.getOne(idPedido).get();
         return new ResponseEntity<>(pedido, HttpStatus.OK);
     }
 
@@ -45,35 +53,25 @@ public class PedidoController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody PedidoDTO pedidoDTO) {
+    public ResponseEntity<?> create(@RequestBody PedidoDTO pedidoDTO){
         if (StringUtils.isBlank(pedidoDTO.getIdUsuario()))
             return new ResponseEntity<>(new Mensaje("El ID del usuario es obligatorio"), HttpStatus.BAD_REQUEST);
         Pedido pedido = new Pedido(pedidoDTO.getFecha(), pedidoDTO.getValorTotal(), pedidoDTO.getTipoEntrega(),
-                pedidoDTO.getTelefono(), pedidoDTO.getDireccion(), pedidoDTO.getIdEstado(), pedidoDTO.getIdUsuario());
+                pedidoDTO.getTelefono(), pedidoDTO.getDireccion(), pedidoDTO.getIdEstado(), pedidoDTO.getIdUsuario(),
+                pedidoDTO.getComentario());
         pedido.setFecha(new Date());
         pedido.setProductos(pedidoDTO.getProductos());
         pedidoService.save(pedido);
         return new ResponseEntity<>(new Mensaje("El pedido ha sido creado correctamente"), HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody PedidoDTO pedidoDTO) {
-        if (!pedidoService.existsById(id))
-            return new ResponseEntity(new Mensaje("El carrito no existe"), HttpStatus.NOT_FOUND);
-        if (pedidoService.existsByIdUsuario(pedidoDTO.getIdUsuario()) && pedidoService.getByIdUsuario(pedidoDTO.getIdUsuario()).get().getIdPedido() != id)
-            return new ResponseEntity<>(new Mensaje("Ese usuario ya posee un carrito"),
-                    HttpStatus.BAD_REQUEST);
-        if (StringUtils.isBlank(pedidoDTO.getIdUsuario()))
-            return new ResponseEntity<>(new Mensaje("El ID del usuario es obligatorio"), HttpStatus.BAD_REQUEST);
-        Pedido pedido = pedidoService.getOne(id).get();
-        pedido.setFecha(pedidoDTO.getFecha());
-        pedido.setValorTotal(pedidoDTO.getValorTotal());
-        pedido.setTipoEntrega(pedidoDTO.getTipoEntrega());
-        pedido.setTelefono(pedidoDTO.getTelefono());
-        pedido.setDireccion(pedidoDTO.getDireccion());
+    @PutMapping("/update/{idPedido}")
+    public ResponseEntity<?> update(@PathVariable("idPedido") int idPedido, @RequestBody PedidoDTO pedidoDTO) {
+        if (!pedidoService.existsById(idPedido))
+            return new ResponseEntity(new Mensaje("El pedido no existe"), HttpStatus.NOT_FOUND);
+        Pedido pedido = pedidoService.getOne(idPedido).get();
         pedido.setIdEstado(pedidoDTO.getIdEstado());
-        pedido.setIdUsuario(pedidoDTO.getIdUsuario());
-        pedido.setProductos(pedidoDTO.getProductos());
+        pedido.setComentario(pedidoDTO.getComentario());
         pedidoService.save(pedido);
         return new ResponseEntity<>(new Mensaje("El pedido ha sido actualizado correctamente"), HttpStatus.OK);
     }

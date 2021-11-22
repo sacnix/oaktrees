@@ -13,12 +13,13 @@ public class PedidoDTO {
     private String tipoEntrega;
     private String telefono;
     private String direccion;
-    private int idEstado;
+    private String idEstado;
     private String idUsuario;
+    private String comentario;
     private List<Producto> productos = new ArrayList<>();
 
-    public PedidoDTO(Date fecha, float valorTotal, String tipoEntrega, String telefono, String direccion, int idEstado,
-                  String idUsuario) {
+    public PedidoDTO(Date fecha, float valorTotal, String tipoEntrega, String telefono, String direccion, String idEstado,
+                  String idUsuario, String comentario) {
         this.fecha = fecha;
         this.valorTotal = valorTotal;
         this.tipoEntrega = tipoEntrega;
@@ -26,6 +27,7 @@ public class PedidoDTO {
         this.direccion = direccion;
         this.idEstado = idEstado;
         this.idUsuario = idUsuario;
+        this.comentario = comentario;
     }
 
     public PedidoDTO() {
@@ -71,11 +73,11 @@ public class PedidoDTO {
         this.direccion = direccion;
     }
 
-    public int getIdEstado() {
+    public String getIdEstado() {
         return idEstado;
     }
 
-    public void setIdEstado(int idEstado) {
+    public void setIdEstado(String idEstado) {
         this.idEstado = idEstado;
     }
 
@@ -95,4 +97,11 @@ public class PedidoDTO {
         this.productos = productos;
     }
 
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
 }

@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="card-body d-flex justify-content-between">
-                        <button type="submit" class=" btn btn-primary-oak" *ngIf="isLogged"><i class="fas fa-plus-circle"></i> Agregar al carrito</button>
+                        <button type="submit" class=" btn btn-primary-oak" *ngIf="isLogged && !(isAdmin || isVendedor)" (click)="agregarProducto(producto.idProducto)"><i class="fas fa-plus-circle"></i> Agregar al carrito</button>
                         <button type="submit" class=" btn btn-secundary-oak" routerLink="/catalogo"><i class="fas fa-arrow-circle-left"></i> Atrás</button>
                     </div>
                     <div class="mb-3 row" *ngIf="!isLogged">

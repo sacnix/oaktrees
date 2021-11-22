@@ -31,7 +31,8 @@ export class RealizarPedidoComponent implements OnInit {
   telefono: string;
   cambio= false;
   pedido: Pedido;
-  idEstado = 1;
+  idEstado = 'Recibido';
+  comentario = '';
 
   constructor(
     private tokenService: TokenService,
@@ -95,7 +96,7 @@ export class RealizarPedidoComponent implements OnInit {
 
   onUpload(): void {
 
-    this.pedido = new Pedido(this.total, this.envio, this.telefono, this.direccion, this.idEstado, this.carrito.idUsuario, this.producto);
+    this.pedido = new Pedido(this.total, this.envio, this.telefono, this.direccion, this.idEstado, this.carrito.idUsuario, this.producto, this.comentario);
     console.log("aqui "+ this.pedido.direccion);
     console.log("aqui "+ this.producto.length);
     this.pedidoService.crear(this.pedido).subscribe(
@@ -103,7 +104,16 @@ export class RealizarPedidoComponent implements OnInit {
         this.toastr.success('Pedido creado exitosamente', 'OK', {
           timeOut: 3000, positionClass: 'toast-top-center'
         });
-        this.router.navigate(['/catalogo']);
+        this.carrito.productos = [];
+        this.carritoService.update(this.id, this.carrito).subscribe(
+          data => {
+            this.router.navigate(['/catalogo']);
+          },
+          err => {
+            this.router.navigate(['/catalogo']);
+          }
+        )
+
       },
       err => {
         this.toastr.error(err.error.mensaje, 'Fail', {

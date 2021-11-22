@@ -2,7 +2,9 @@ package co.com.oaktrees.controller;
 
 
 import co.com.oaktrees.dto.Mensaje;
+import co.com.oaktrees.entity.Categoria;
 import co.com.oaktrees.entity.Producto;
+import co.com.oaktrees.service.CategoriaService;
 import co.com.oaktrees.service.CloudinaryService;
 import co.com.oaktrees.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,26 @@ public class CatalogoController {
     ProductoService productoService;
 
     @Autowired
+    CategoriaService categoriaService;
+
+    @Autowired
     CloudinaryService cloudinaryService;
 
     @GetMapping("/lista")
     public ResponseEntity<List<Producto>> listar(){
         List<Producto> list = productoService.list();
+        return new ResponseEntity(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/listar-filtros")
+    public ResponseEntity<List<Categoria>> list(){
+        List<Categoria> list = categoriaService.list();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/lista-categoria/{categoria}")
+    public ResponseEntity<List<Producto>> listarCategoria(@PathVariable("categoria") String categoria){
+        List<Producto> list = productoService.listCategoria(categoria);
         return new ResponseEntity(list, HttpStatus.OK);
     }
 

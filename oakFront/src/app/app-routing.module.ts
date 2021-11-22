@@ -24,6 +24,9 @@ import { NuevaCategoriaComponent } from './categoria/nueva-categoria/nueva-categ
 import { EditarCategoriaAdminComponent } from './categoria/editar-categoria-admin/editar-categoria-admin.component';
 import { VerCarritoComponent } from './carrito/ver-carrito/ver-carrito.component';
 import { RealizarPedidoComponent } from './pedido/realizar-pedido/realizar-pedido.component';
+import { EditarPedidoComponent } from './pedido/editar-pedido/editar-pedido.component';
+import { ListarPedidosComponent } from './pedido/listar-pedidos/listar-pedidos.component';
+import { EditarPedidoAdminComponent } from './pedido/editar-pedido-admin/editar-pedido-admin.component';
 
 const routes: Routes = [
   { path: '', component: ListaPrincipalComponent },
@@ -43,9 +46,12 @@ const routes: Routes = [
   { path: 'rol/editar/:id', component: EditarRolComponent, canActivate: [guard], data: { expectedRol: ['admin', 'vendedor'] } },
   { path: 'catalogo', component: ListarComponent },
   { path: 'ver-producto/:idProducto', component: VerProductoComponent },
-  { path: 'historico-pedidos', component: HistoricoPedidoComponent, canActivate: [guard], data: { expectedRol: ['user'] }  },
+  { path: 'historico-pedidos/:correo', component: HistoricoPedidoComponent, canActivate: [guard], data: { expectedRol: ['user'] }  },
   { path: 'realizar-pedido/:idCarrito', component: RealizarPedidoComponent, canActivate: [guard], data: { expectedRol: ['user'] }  },
+  { path: 'ver-pedido/:idPedido', component: EditarPedidoComponent, canActivate: [guard], data: { expectedRol: ['user'] }  },
   { path: 'categorias', component: CategoriasAdminComponent, canActivate: [guard], data: { expectedRol: ['admin', 'vendedor'] }  },
+  { path: 'pedidos', component: ListarPedidosComponent, canActivate: [guard], data: { expectedRol: ['admin', 'vendedor'] }  },
+  { path: 'editar-pedido/:idPedido', component: EditarPedidoAdminComponent, canActivate: [guard], data: { expectedRol: ['admin', 'vendedor'] }  },
   { path: 'categorias/nueva-categoria', component: NuevaCategoriaComponent, canActivate: [guard], data: { expectedRol: ['admin'] }  },
   { path: 'categorias/editar-categoria/:id', component: EditarCategoriaAdminComponent, canActivate: [guard], data: { expectedRol: ['admin'] }  },
   { path: 'carrito/:id', component: VerCarritoComponent, canActivate: [guard], data: { expectedRol: ['vendedor', 'user'] } },

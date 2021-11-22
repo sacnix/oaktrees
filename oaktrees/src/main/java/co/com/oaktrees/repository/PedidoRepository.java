@@ -3,6 +3,7 @@ package co.com.oaktrees.repository;
 import co.com.oaktrees.entity.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
@@ -16,4 +17,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
     boolean existsByIdPedido(int idPedido);
 
     void deleteByIdPedido(int idPedido);
+
+    List<Pedido> findAllByIdUsuario(String idUsuario);
 }

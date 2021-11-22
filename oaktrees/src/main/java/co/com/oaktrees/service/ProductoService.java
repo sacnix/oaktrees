@@ -20,6 +20,9 @@ public class ProductoService {
         return productoRepository.findByOrderByIdProducto();
     }
 
+    public List<Producto> listCategoria(String categoria){
+        return productoRepository.findAllByCategoria(categoria);
+    }
     public Optional<Producto> getOne(int id){
         return productoRepository.findByIdProducto(id);
     }

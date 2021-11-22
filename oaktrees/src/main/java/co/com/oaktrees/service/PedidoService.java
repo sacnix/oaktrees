@@ -20,6 +20,10 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
+    public List<Pedido> listByCorreo(String idUsuario){
+        return pedidoRepository.findAllByIdUsuario(idUsuario);
+    }
+
     public Optional<Pedido> getOne(int id){
         return pedidoRepository.findByIdPedido(id);
     }

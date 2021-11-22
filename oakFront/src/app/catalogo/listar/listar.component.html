@@ -18,9 +18,8 @@
             </button>
                         <div class="collapse show" id="home-collapse">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li><a href="#" class="link-dark rounded">Cuadernos</a></li>
-                                <li><a href="#" class="link-dark rounded">Maquillaje</a></li>
-                                <li><a href="#" class="link-dark rounded">Juguetes</a></li>
+                                <li><a style="cursor:pointer;" class="link-dark rounded" (click)="cargarProductos()">Todas</a></li>
+                                <li *ngFor="let categorias of categorias"><a style="cursor:pointer;" class="link-dark rounded" (click)="listarPorCategorias(categorias.nombre)">{{categorias.nombre}}</a></li>
                             </ul>
                         </div>
                     </li>
@@ -39,7 +38,7 @@
                                     <p class="card-text">${{producto.precio}}</p>
                                     <div class="card-body d-flex justify-content-between">
                                         <button class="btn btn-secundary-oak" routerLink="/ver-producto/{{producto.idProducto}}"><i class="far fa-eye"></i> Ver</button>
-                                        <button class="btn btn-primary-oak" (click)="agregarProducto(producto.idProducto)"><i class="fas fa-plus-circle"></i> Agregar</button>
+                                        <button *ngIf="isLogged && !(isAdmin || isVendedor)" class="btn btn-primary-oak" (click)="agregarProducto(producto.idProducto)"><i class="fas fa-plus-circle"></i> Agregar</button>
                                     </div>
                                 </div>
                             </div>

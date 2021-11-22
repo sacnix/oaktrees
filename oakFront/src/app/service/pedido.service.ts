@@ -12,15 +12,23 @@ export class PedidoService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public detail(id: string): Observable<Pedido> {
-    return this.httpClient.get<Pedido>(this.pedidoURL + `detailname/${id}`);
+  public detail(idPedido: string): Observable<Pedido> {
+    return this.httpClient.get<Pedido>(this.pedidoURL + `detail/${idPedido}`);
   }
 
   public crear(pedido: Pedido): Observable<any> {
     return this.httpClient.post<any>(this.pedidoURL + 'create', pedido);
   }
 
-  public update(id: number | undefined, pedido: Pedido): Observable<any> {
-    return this.httpClient.put<any>(this.pedidoURL + `update/${id}`, pedido);
+  public update(idPedido: number | undefined, pedido: Pedido): Observable<any> {
+    return this.httpClient.put<any>(this.pedidoURL + `update/${idPedido}`, pedido);
+  }
+
+  public listarPedidos(idUsuario: string): Observable<Pedido[]> {
+    return this.httpClient.get<Pedido[]>(this.pedidoURL + `historico/${idUsuario}`);
+  }
+
+  public listarPedidosAdmin(): Observable<Pedido[]> {
+    return this.httpClient.get<Pedido[]>(this.pedidoURL + `lista`);
   }
 }

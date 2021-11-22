@@ -20,4 +20,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
     void deleteByIdProducto(int id);
 
     List<Producto> findByOrderByIdProducto();
+
+    List<Producto> findAllByCategoria(String categoria);
 }

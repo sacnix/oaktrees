@@ -8,7 +8,7 @@ import { Carrito } from '../models/carrito';
 })
 export class CarritoService {
 
-  carritoURL = 'http://localhost:8080/carrito/';
+  carritoURL = 'https://oak-trees-spring.herokuapp.com/carrito/';
 
 
   constructor(private httpClient: HttpClient) { }

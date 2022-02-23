@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/estado-pedido")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://oak-trees-angular.herokuapp.com")
 public class EstadoPedidoController {
 
     @Autowired

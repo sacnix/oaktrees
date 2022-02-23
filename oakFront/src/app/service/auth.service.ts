@@ -10,7 +10,7 @@ import {JwtDTO} from "../models/jwt-dto";
 })
 export class AuthService {
 
-  authURL = 'http://localhost:8080/usuario/auth/';
+  authURL = 'https://oak-trees-spring.herokuapp.com/usuario/auth/';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -27,7 +27,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/usuario")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://oak-trees-angular.herokuapp.com")
 public class PersonaController {
 
     @Autowired

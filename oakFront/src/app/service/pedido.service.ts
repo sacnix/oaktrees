@@ -8,7 +8,7 @@ import { Pedido } from '../models/pedido';
 })
 export class PedidoService {
 
-  pedidoURL = 'http://localhost:8080/pedido/';
+  pedidoURL = 'https://oak-trees-spring.herokuapp.com/pedido/';
 
   constructor(private httpClient: HttpClient) { }
 

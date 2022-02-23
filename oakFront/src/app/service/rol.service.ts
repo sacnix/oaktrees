@@ -8,7 +8,7 @@ import { Rol } from '../models/rol';
 })
 export class RolService {
 
-  rolURL = 'http://localhost:8080/rol/';
+  rolURL = 'https://oak-trees-spring.herokuapp.com/rol/';
 
   constructor(private httpClient: HttpClient) { }
 

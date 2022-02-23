@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuario/auth/catalogo")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://oak-trees-angular.herokuapp.com")
 public class CatalogoController {
 
     @Autowired

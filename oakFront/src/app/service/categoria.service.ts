@@ -8,7 +8,7 @@ import { Categoria } from '../models/categoria';
 })
 export class CategoriaService {
 
-  categoriaURL = 'http://localhost:8080/categoria/';
+  categoriaURL = 'https://oak-trees-spring.herokuapp.com/categoria/';
 
   constructor(private httpClient: HttpClient) { }
 

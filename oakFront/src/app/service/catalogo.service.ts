@@ -8,7 +8,7 @@ import { Producto } from '../models/producto';
 })
 export class CatalogoService {
 
-  productoURL = 'http://localhost:8080/usuario/auth/catalogo/';
+  productoURL = 'https://oak-trees-spring.herokuapp.com/usuario/auth/catalogo/';
 
   constructor(private httpClient: HttpClient) { }
 

@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pedido")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://oak-trees-angular.herokuapp.com")
 public class PedidoController {
 
     @Autowired

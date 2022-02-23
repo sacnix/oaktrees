@@ -18,7 +18,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/producto")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://oak-trees-angular.herokuapp.com")
 public class ProductoController {
 
     @Autowired
